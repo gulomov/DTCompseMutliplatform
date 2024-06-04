@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "380058438812",
+    "firebase_url": "https://diplomathesiskmp-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "diplomathesiskmp",
+    "storage_bucket": "diplomathesiskmp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:380058438812:android:3577647f2e8ca14320f159",
+        "android_client_info": {
+          "package_name": "org.dtcm.work"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBB83UTeaTYaf16vlJxzWpQqTU3_lazGlo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
