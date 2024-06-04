@@ -1,3 +1,5 @@
+package repository
+
 import dev.gitlive.firebase.database.DatabaseReference
 import dev.gitlive.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.channels.awaitClose
@@ -18,10 +20,10 @@ inline fun <reified T : Any> fetchFromDatabase(
                 trySend(it)
             }
         } else {
-            println("No data found")
+            println("No repository.data found")
         }
     } catch (e: Exception) {
-        println("Error fetching data from Firebase: ${e.message}")
+        println("Error fetching repository.data from Firebase: ${e.message}")
         close(e)
     }
 

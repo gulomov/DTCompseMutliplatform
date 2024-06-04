@@ -16,6 +16,9 @@ kotlin = "2.0.0"
 google-services = "4.4.2"
 gitlive-firebase = "1.12.0"
 kotlin-serialization = "1.6.3"
+koin = "3.6.0-alpha3"
+koinComposeMultiplatform = "1.2.0-alpha3"
+viewmode-compose = "2.8.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -31,6 +34,12 @@ androidx-activity-compose = { module = "androidx.activity:activity-compose", ver
 firebase-realtime-database = { module = "dev.gitlive:firebase-database", version.ref = "gitlive-firebase" }
 firebase-common = { module = "dev.gitlive:firebase-common", version.ref = "gitlive-firebase" }
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialization" }
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinComposeMultiplatform" }
+
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+
+viewmode-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose",version.ref ="viewmode-compose" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

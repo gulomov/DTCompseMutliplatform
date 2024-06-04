@@ -36,6 +36,7 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.koin.android)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -47,6 +48,9 @@ kotlin {
             implementation(libs.firebase.common)
             implementation(libs.firebase.realtime.database)
             implementation(libs.kotlinx.serialization)
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(libs.viewmode.compose)
         }
     }
 }

@@ -1,4 +1,4 @@
-package data
+package repository.data
 
 import kotlinx.serialization.Serializable
 
@@ -9,7 +9,7 @@ data class NewsInfo(
 )
 
 @Serializable
-data class NewsItem(
+    data class NewsItem(
     val id: Int? = null,
     val image: String? = null,
     val body: String? = null,
