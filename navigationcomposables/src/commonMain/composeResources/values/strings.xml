@@ -1,0 +1,5 @@
+<resources>
+    <string name="bottom_nav_home">Home</string>
+    <string name="bottom_nav_favorite">Favorite</string>
+    <string name="bottom_nav_gallery">Gallery</string>
+</resources>
