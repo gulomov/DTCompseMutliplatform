@@ -1,13 +1,12 @@
 package repository
 
-import database.AppDatabase
-import database.entities.NewsInfoEntity
 import dev.gitlive.firebase.database.FirebaseDatabase
-import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
+import org.dtcm.work.database.AppDatabase
+import org.dtcm.work.database.entities.NewsInfoEntity
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import repository.data.NewsInfo
