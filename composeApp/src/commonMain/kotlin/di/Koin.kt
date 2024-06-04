@@ -11,6 +11,7 @@ fun initKoin(appModule: Module = module { }): KoinApplication = startKoin {
         firebaseModule,
         repositoryModule,
         domainModule,
-        viewModelModule
+        viewModelModule,
+        platformModule
     )
 }
