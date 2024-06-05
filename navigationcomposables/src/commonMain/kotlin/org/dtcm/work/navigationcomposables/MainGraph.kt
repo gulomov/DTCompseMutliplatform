@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import org.dtcm.work.home.domain.HomeScreen
 import org.dtcm.work.navigationroute.ScreenRoute.FAVORITE
 import org.dtcm.work.navigationroute.ScreenRoute.GALLERY
 import org.dtcm.work.navigationroute.ScreenRoute.HOME
@@ -14,7 +15,7 @@ import org.dtcm.work.navigationroute.ScreenRoute.RECOMMENDATION_DETAILS
 
 fun NavGraphBuilder.mainGraph(navController: NavHostController) {
     composable(HOME) {
-       // HomeScreen(navController = navController)
+        HomeScreen(navController = navController)
     }
     composable(
         route = PRODUCTION_DETAIL,

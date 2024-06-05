@@ -1,16 +1,17 @@
-package repository
+package org.dtcm.work.repository
 
 import dev.gitlive.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
+import org.dtcm.work.common.data.NewsInfo
+import org.dtcm.work.common.data.NewsItem
 import org.dtcm.work.database.AppDatabase
 import org.dtcm.work.database.entities.NewsInfoEntity
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import repository.data.NewsInfo
-import repository.data.NewsItem
+import org.dtcm.work.repository.firebasehelper.fetchFromDatabase
 
 class HomeRepository : KoinComponent {
     private val firebaseDatabase: FirebaseDatabase by inject()

@@ -1,7 +1,9 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 kotlin {
@@ -19,23 +21,23 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "design"
+            baseName = "repository"
             isStatic = true
         }
     }
 
     sourceSets {
-        androidMain.dependencies {
-            implementation(libs.koin.android)
-        }
         commonMain.dependencies {
-            implementation(libs.compose.material3.multiplatform)
+            implementation(projects.database)
+            implementation(projects.common)
+
+            implementation(compose.runtime)
+            implementation(compose.foundation)
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.kotlinx.serialization)
-            implementation(libs.coil)
-            implementation(libs.coil.compose)
-            implementation(libs.coil.ktor)
+            implementation(libs.firebase.common)
+            implementation(libs.firebase.realtime.database)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -44,13 +46,10 @@ kotlin {
 }
 
 android {
-    namespace = "org.dtcm.work.design"
+    namespace = "org.dtcm.work.repository"
     compileSdk = 34
     defaultConfig {
         minSdk = 24
-    }
-    buildFeatures {
-        compose = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11

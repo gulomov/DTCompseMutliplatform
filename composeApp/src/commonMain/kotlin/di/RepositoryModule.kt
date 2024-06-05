@@ -1,7 +1,7 @@
 package di
 
+import org.dtcm.work.repository.HomeRepository
 import org.koin.dsl.module
-import repository.HomeRepository
 
 val repositoryModule = module {
     factory { HomeRepository() }

@@ -1,4 +1,4 @@
-package repository
+package org.dtcm.work.repository.firebasehelper
 
 import dev.gitlive.firebase.database.DatabaseReference
 import dev.gitlive.firebase.database.FirebaseDatabase

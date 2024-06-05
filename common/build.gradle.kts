@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.compose.compiler)
 }
 
@@ -12,30 +13,24 @@ kotlin {
             }
         }
     }
-
+    
     listOf(
         iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "design"
+            baseName = "common"
             isStatic = true
         }
     }
 
     sourceSets {
-        androidMain.dependencies {
-            implementation(libs.koin.android)
-        }
         commonMain.dependencies {
-            implementation(libs.compose.material3.multiplatform)
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.kotlinx.serialization)
-            implementation(libs.coil)
-            implementation(libs.coil.compose)
-            implementation(libs.coil.ktor)
+            implementation(libs.viewmode.compose)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -44,13 +39,10 @@ kotlin {
 }
 
 android {
-    namespace = "org.dtcm.work.design"
+    namespace = "org.dtcm.work.common"
     compileSdk = 34
     defaultConfig {
         minSdk = 24
-    }
-    buildFeatures {
-        compose = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11

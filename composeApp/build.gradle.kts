@@ -48,6 +48,11 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(projects.database)
+            implementation(projects.repository)
+            implementation(projects.domain)
+            implementation(projects.common)
+            implementation(projects.home)
+            implementation(projects.navigationcomposables)
 
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -63,6 +68,7 @@ kotlin {
             implementation(libs.viewmode.compose)
             implementation(libs.room.runtime)
             implementation(libs.sqlite.bundled)
+            implementation(libs.androidx.navigation)
         }
     }
 }

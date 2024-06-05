@@ -30,6 +30,11 @@ kotlin {
             implementation(libs.koin.android)
         }
         commonMain.dependencies {
+            implementation(projects.domain)
+            implementation(projects.design)
+            implementation(projects.common)
+            implementation(projects.navigationroute)
+
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material)
