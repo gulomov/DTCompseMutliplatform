@@ -8,7 +8,7 @@ import org.dtcm.work.database.AppDatabase
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class ProductDetailRepository : KoinComponent {
+class ProductDetailsRepository : KoinComponent {
     private val roomDb: AppDatabase by inject()
     fun getTopProductDetails(productId: String) =
         roomDb.productDao().getTopProductDetail(productId).map {
