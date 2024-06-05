@@ -9,7 +9,7 @@ import org.dtcm.work.repository.ProductDetailsRepository
 import org.koin.dsl.module
 
 val repositoryModule = module {
-    factory { HomeRepository() }
+    factory { HomeRepository(get(), get()) }
     factory { ProductDetailsRepository() }
     factory { AllProductsRepository() }
     factory { BookedProductsRepository() }

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="topProductsTitle">Top Products</string>
+    <string name="productsSalePercentage"> %1$s%%</string>
+    <string name="product_price">%1$sKć</string>
+</resources>

@@ -9,8 +9,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import org.dtcm.work.common.data.ui.TopProductsLazyRow
 import org.dtcm.work.design.normal100
 import org.dtcm.work.home.domain.components.NewsInHome
+import org.dtcm.work.home.domain.components.RecommendationsInHome
 import org.koin.compose.koinInject
 
 @Composable
@@ -20,8 +22,13 @@ fun HomeScreen(
     modifier: Modifier = Modifier
 ) {
     val news by viewModel.news.collectAsState()
+    val recommendations by viewModel.recommendationsList.collectAsState()
+    val topProducts by viewModel.topProductsList.collectAsState()
+
     LaunchedEffect(Unit) {
         viewModel.getNews()
+        viewModel.getRecommendationsList()
+        viewModel.getTopProductsList()
     }
 
     LazyColumn(
@@ -31,7 +38,7 @@ fun HomeScreen(
             NewsInHome(news = news, navController = navController)
             Spacer(modifier = Modifier.height(normal100))
         }
-        /*item {
+        item {
             RecommendationsInHome(recommendations = recommendations, navController = navController)
             Spacer(modifier = Modifier.height(normal100))
         }
@@ -40,7 +47,7 @@ fun HomeScreen(
                 productList = topProducts,
                 navController = navController,
             )
-        }*/
+        }
     }
 
 }

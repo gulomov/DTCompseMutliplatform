@@ -21,9 +21,11 @@ import org.koin.core.component.inject
 import org.dtcm.work.repository.firebasehelper.fetchFromDatabase
 
 private const val AMOUNT_OF_TOP_PRODUCTS_IN_HOME_SCREEN = 5
-class HomeRepository : KoinComponent {
-    private val firebaseDatabase: FirebaseDatabase by inject()
-    private val roomDb: AppDatabase by inject()
+
+class HomeRepository(
+    private val firebaseDatabase: FirebaseDatabase,
+    private val roomDb: AppDatabase
+) {
 
     suspend fun fetchAndSaveNewsInfoFromFirebase() {
         fetchFromDatabase<NewsInfo>("home/news", firebaseDatabase).collect { newsInfo ->
@@ -101,11 +103,12 @@ class HomeRepository : KoinComponent {
         }
     }
 
-    fun getRecommendations() = roomDb.homeScreenDao().getHomeRecommendationsFlow().map { recommendations ->
-        recommendations.map {
-            RecommendationItem(id = it.id, image = it.imageUrl, brand = it.brand)
+    fun getRecommendations() =
+        roomDb.homeScreenDao().getHomeRecommendationsFlow().map { recommendations ->
+            recommendations.map {
+                RecommendationItem(id = it.id, image = it.imageUrl, brand = it.brand)
+            }
         }
-    }
 
     fun getTopProducts() = roomDb.homeScreenDao().getTopProductsFlow().map { topProducts ->
         topProducts.shuffled().take(AMOUNT_OF_TOP_PRODUCTS_IN_HOME_SCREEN).map {

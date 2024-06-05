@@ -9,10 +9,10 @@ import org.koin.dsl.module
 fun initKoin(appModule: Module = module { }): KoinApplication = startKoin {
     modules(
         appModule,
+        databaseModule,
         firebaseModule,
         repositoryModule,
         domainModule,
         viewModelModule,
-        databaseModule
     )
 }

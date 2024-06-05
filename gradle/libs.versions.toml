@@ -27,6 +27,7 @@ compose-material3-multiplatform = "1.6.2"
 navigation-compose = "2.7.0-alpha07"
 foundationLayoutAndroid = "1.6.7"
 uiAndroid = "1.6.7"
+material3Android = "1.2.1"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -69,6 +70,7 @@ coil-ktor = { module = "io.coil-kt.coil3:coil-network-ktor", version.ref = "coil
 
 #NAVIGATION
 androidx-navigation = {module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation-compose"}
+androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

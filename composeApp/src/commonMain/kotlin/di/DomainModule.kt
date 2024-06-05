@@ -1,6 +1,7 @@
 package di
 
 import org.dtcm.work.domain.DeleteFromFavoriteProductsUseCase
+import org.dtcm.work.domain.FetchAllProductsFromFirebaseAndSaveUseCase
 import org.dtcm.work.domain.FetchBrandsFromFirebaseAndSaveUseCase
 import org.dtcm.work.domain.FetchNewsFromFirebaseAndSaveUseCase
 import org.dtcm.work.domain.FetchRecommendationsFromFirebaseAndSaveUseCase
@@ -24,26 +25,27 @@ import org.dtcm.work.domain.SaveToFavoriteProductUseCase
 import org.koin.dsl.module
 
 val domainModule = module {
-    single { FetchNewsFromFirebaseAndSaveUseCase() }
-    single { FetchRecommendationsFromFirebaseAndSaveUseCase() }
-    single { FetchTopProductsFromFirebaseAndSaveUseCase() }
-    single { FetchRecommendationsFromFirebaseAndSaveUseCase() }
-    single { FetchBrandsFromFirebaseAndSaveUseCase() }
-    single { GetHomeRecommendationsUseCase() }
-    single { GetNewsDetailUseCase() }
-    single { GetHomeScreenNewsUseCase() }
-    single { GetBookedProductByIdUseCase() }
-    single { GetFavoriteProductsIdsUseCase() }
-    single { GetProductsByBrandNameUseCase() }
-    single { GetTopProductsUseCase() }
-    single { GetFavoriteProductsUseCase() }
-    single { GetAllProductsUseCase() }
-    single { GetBrandsUseCase() }
-    single { GetProductDetailsUseCase() }
-    single { GetTopProductDetailsUseCase() }
-    single { IsProductBookedUseCase() }
-    single { IsProductInFavoritesUseCase() }
-    single { SaveBookedProductUseCase() }
-    single { SaveToFavoriteProductUseCase() }
-    single { DeleteFromFavoriteProductsUseCase() }
+    factory { FetchNewsFromFirebaseAndSaveUseCase(get()) }
+    factory { FetchAllProductsFromFirebaseAndSaveUseCase() }
+    factory { FetchRecommendationsFromFirebaseAndSaveUseCase() }
+    factory { FetchTopProductsFromFirebaseAndSaveUseCase() }
+    factory { FetchRecommendationsFromFirebaseAndSaveUseCase() }
+    factory { FetchBrandsFromFirebaseAndSaveUseCase() }
+    factory { GetHomeRecommendationsUseCase() }
+    factory { GetNewsDetailUseCase(get()) }
+    factory { GetHomeScreenNewsUseCase() }
+    factory { GetBookedProductByIdUseCase() }
+    factory { GetFavoriteProductsIdsUseCase() }
+    factory { GetProductsByBrandNameUseCase() }
+    factory { GetTopProductsUseCase() }
+    factory { GetFavoriteProductsUseCase() }
+    factory { GetAllProductsUseCase() }
+    factory { GetBrandsUseCase() }
+    factory { GetProductDetailsUseCase() }
+    factory { GetTopProductDetailsUseCase() }
+    factory { IsProductBookedUseCase() }
+    factory { IsProductInFavoritesUseCase() }
+    factory { SaveBookedProductUseCase() }
+    factory { SaveToFavoriteProductUseCase() }
+    factory { DeleteFromFavoriteProductsUseCase() }
 }
