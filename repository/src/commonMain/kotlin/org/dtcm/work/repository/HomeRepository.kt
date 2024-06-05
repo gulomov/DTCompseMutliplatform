@@ -1,5 +1,6 @@
 package org.dtcm.work.repository
 
+import database.entities.HomeRecommendationsEntity
 import dev.gitlive.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -7,6 +8,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import org.dtcm.work.common.data.NewsInfo
 import org.dtcm.work.common.data.NewsItem
+import org.dtcm.work.common.data.RecommendationsList
 import org.dtcm.work.database.AppDatabase
 import org.dtcm.work.database.entities.NewsInfoEntity
 import org.koin.core.component.KoinComponent
@@ -16,23 +18,6 @@ import org.dtcm.work.repository.firebasehelper.fetchFromDatabase
 class HomeRepository : KoinComponent {
     private val firebaseDatabase: FirebaseDatabase by inject()
     private val roomDb: AppDatabase by inject()
-    /*suspend fun fetchAndSaveNewsInfoFromFirebase(): NewsInfo? {
-        val deferred = CompletableDeferred<NewsInfo?>()
-
-        try {
-            fetchFromDatabase<NewsInfo>("home/news", firebaseDatabase).collect { newsInfo ->
-                if (newsInfo != null) {
-                    deferred.complete(newsInfo)
-                    println("newsInfo in DTComposableMultiplatform: $newsInfo")
-                } else {
-                    deferred.complete(null)
-                }
-            }
-        } catch (e: Exception) {
-            deferred.completeExceptionally(e)
-        }
-        return deferred.await()
-    }*/
 
     suspend fun fetchAndSaveNewsInfoFromFirebase() {
         fetchFromDatabase<NewsInfo>("home/news", firebaseDatabase).collect { newsInfo ->
@@ -48,6 +33,25 @@ class HomeRepository : KoinComponent {
                             ),
                         )
                     }
+                }
+            }
+        }
+    }
+
+    suspend fun fetchAndSaveHomeRecommendationsFromFirebase() {
+        fetchFromDatabase<RecommendationsList>(
+            "home/recommendations",
+            firebaseDatabase,
+        ).collect { data ->
+            withContext(Dispatchers.IO) {
+                data?.recommendationsList?.map {
+                    roomDb.homeScreenDao().saveHomeRecommendations(
+                        HomeRecommendationsEntity(
+                            id = it.id ?: 0,
+                            imageUrl = it.image.orEmpty(),
+                            brand = it.brand.toString()
+                        ),
+                    )
                 }
             }
         }

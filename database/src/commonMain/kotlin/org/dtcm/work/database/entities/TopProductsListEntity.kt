@@ -19,13 +19,3 @@ data class TopProductsListEntity(
     @ColumnInfo(name = "sizes") val sizes: String,
     @ColumnInfo(name = "brand") val brand: String
 )
-
-@Serializable
-data class ProductImages(
-    val imageUrl: String = "",
-)
-
-@Serializable
-data class ProductSizes(
-    val size: String = "",
-)

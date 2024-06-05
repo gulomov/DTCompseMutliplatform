@@ -1,8 +1,8 @@
 import androidx.room.TypeConverter
-import org.dtcm.work.database.entities.ProductImages
-import org.dtcm.work.database.entities.ProductSizes
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import org.dtcm.work.database.data.ProductImages
+import org.dtcm.work.database.data.ProductSizes
 
 class Converters {
     private val json = Json { ignoreUnknownKeys = true }
