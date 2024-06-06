@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import org.dtcm.work.favorites.FavoritesScreen
 import org.dtcm.work.gallery.GalleryScreen
 import org.dtcm.work.home.domain.HomeScreen
 import org.dtcm.work.home.domain.news.NewsDetailScreen
@@ -50,7 +51,7 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController) {
         //RecommendationsDetail(navController = navController)
     }
     composable(FAVORITE) {
-        //   FavoritesScreen(navController = navController)
+        FavoritesScreen(navController = navController)
     }
 
     composable(
@@ -63,6 +64,6 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController) {
             },
         ),
     ) {
-          GalleryScreen(navController = navController)
+        GalleryScreen(navController = navController)
     }
 }

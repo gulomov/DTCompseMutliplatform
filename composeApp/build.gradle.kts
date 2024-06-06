@@ -56,6 +56,7 @@ kotlin {
             implementation(projects.navigationcomposables)
             implementation(projects.home)
             implementation(projects.gallery)
+            implementation(projects.favorites)
 
             implementation(compose.runtime)
             implementation(compose.foundation)
