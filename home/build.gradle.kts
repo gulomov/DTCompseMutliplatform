@@ -31,6 +31,7 @@ kotlin {
             implementation(libs.ktor.client.android)
         }
         commonMain.dependencies {
+            implementation(projects.database)
             implementation(projects.domain)
             implementation(projects.design)
             implementation(projects.common)

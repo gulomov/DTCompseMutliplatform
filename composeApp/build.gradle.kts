@@ -57,6 +57,7 @@ kotlin {
             implementation(projects.home)
             implementation(projects.gallery)
             implementation(projects.favorites)
+            implementation(projects.productdetail)
 
             implementation(compose.runtime)
             implementation(compose.foundation)
