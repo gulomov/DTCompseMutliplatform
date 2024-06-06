@@ -11,20 +11,21 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import io.github.alexzhirkevich.cupertino.adaptive.AdaptiveNavigationBar
+import io.github.alexzhirkevich.cupertino.adaptive.AdaptiveNavigationBarItem
+import io.github.alexzhirkevich.cupertino.adaptive.ExperimentalAdaptiveApi
 import org.jetbrains.compose.resources.stringResource
 
+@OptIn(ExperimentalAdaptiveApi::class)
 @Composable
 fun BottomNavigationBar(navController: NavController) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
-    NavigationBar(
-        containerColor = MaterialTheme.colorScheme.background,
-        contentColor = contentColorFor(MaterialTheme.colorScheme.outline),
-        tonalElevation = 10.dp,
+    AdaptiveNavigationBar(
     ) {
         BottomNavItem.sections.forEach { sections ->
-            NavigationBarItem(
+            AdaptiveNavigationBarItem(
                 selected = currentRoute == sections.route,
                 onClick = {
                     navController.navigate(sections.route) {

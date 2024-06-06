@@ -36,6 +36,7 @@ kotlin {
             implementation(libs.coil)
             implementation(libs.coil.compose)
             implementation(libs.coil.ktor)
+            implementation(libs.cupertino)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

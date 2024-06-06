@@ -1,5 +1,6 @@
 package org.dtcm.work.navigationcomposables
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
@@ -11,6 +12,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import io.github.alexzhirkevich.cupertino.adaptive.AdaptiveScaffold
+import io.github.alexzhirkevich.cupertino.adaptive.ExperimentalAdaptiveApi
 import org.dtcm.work.navigationroute.ScreenRoute.FAVORITE
 import org.dtcm.work.navigationroute.ScreenRoute.GALLERY
 import org.dtcm.work.navigationroute.ScreenRoute.HOME
@@ -20,6 +23,7 @@ import org.dtcm.work.navigationroute.ScreenRoute.NEWS_DETAILS
 import org.dtcm.work.navigationroute.ScreenRoute.PRODUCTION_DETAIL
 import org.dtcm.work.navigationroute.ScreenRoute.RECOMMENDATION_DETAILS
 
+@OptIn(ExperimentalAdaptiveApi::class)
 @Composable
 fun AppNavHost(navController: NavHostController = rememberNavController()) {
     val bottomBarVisible = rememberSaveable { (mutableStateOf(true)) }
@@ -74,7 +78,8 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
 
         else -> topBarVisibility.value = true
     }
-    Scaffold(
+    AdaptiveScaffold(
+        modifier = Modifier.fillMaxSize(),
         topBar = {
             if (topBarVisibility.value)
                 ThesisTopBar(

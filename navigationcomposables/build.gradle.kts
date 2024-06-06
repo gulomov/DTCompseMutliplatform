@@ -13,7 +13,7 @@ kotlin {
             }
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -36,6 +36,7 @@ kotlin {
             implementation(compose.components.resources)
             implementation(libs.androidx.navigation)
             implementation(libs.compose.material3.multiplatform)
+            implementation(libs.cupertino)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

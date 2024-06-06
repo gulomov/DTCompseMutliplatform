@@ -15,19 +15,16 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import io.github.alexzhirkevich.cupertino.adaptive.AdaptiveTopAppBar
+import io.github.alexzhirkevich.cupertino.adaptive.ExperimentalAdaptiveApi
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalAdaptiveApi::class)
 @Composable
 fun ThesisTopBar(
     backArrowVisibility: Boolean,
     navController: NavController = rememberNavController(),
 ) {
-    CenterAlignedTopAppBar(
-        colors =
-        TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            titleContentColor = MaterialTheme.colorScheme.primary,
-        ),
+    AdaptiveTopAppBar(
         title = {
             Text(
                 text = "Sales",

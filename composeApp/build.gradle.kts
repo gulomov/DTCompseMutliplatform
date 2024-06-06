@@ -49,6 +49,7 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(projects.database)
+            implementation(projects.design)
             implementation(projects.repository)
             implementation(projects.domain)
             implementation(projects.common)
@@ -73,6 +74,7 @@ kotlin {
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.serialization.json)
+            implementation(libs.cupertino)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
