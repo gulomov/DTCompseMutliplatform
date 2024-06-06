@@ -21,7 +21,7 @@ import coil3.compose.AsyncImage
 import org.diploma.work.home.Res
 import org.diploma.work.home.homeScreenNewsTitle
 import org.dtcm.work.common.data.data.NewsItem
-import org.dtcm.work.design.AutoSlidingCarousel
+import org.dtcm.work.design.SlidingCarousel
 import org.dtcm.work.design.newsCarouselImageSize
 import org.dtcm.work.design.normal100
 import org.dtcm.work.design.small100
@@ -36,27 +36,23 @@ internal fun NewsInHome(
 ) {
     Column(
         horizontalAlignment = Alignment.Start,
-        modifier =
-        modifier
-            .fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
     ) {
-        Spacer(modifier = Modifier.width(normal100))
         Text(
             text = stringResource(Res.string.homeScreenNewsTitle),
-            modifier = Modifier.padding(normal100),
+            modifier = Modifier.padding(start = normal100, top = normal100),
             fontWeight = FontWeight.Bold,
         )
         Spacer(modifier = Modifier.width(small100))
         Card(
-            modifier =
-            Modifier
+            modifier = Modifier
                 .padding(normal100)
                 .fillMaxWidth(),
             shape = RoundedCornerShape(normal100),
         ) {
             news.let { newsInfo ->
                 if (newsInfo.isNotEmpty()) {
-                    AutoSlidingCarousel(
+                    SlidingCarousel(
                         itemsCount = newsInfo.size,
                         itemContent = {
                             NewsItem(news = newsInfo, index = it, newsItemClicked = { newsId ->
