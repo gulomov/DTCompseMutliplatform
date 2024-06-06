@@ -14,5 +14,6 @@ fun initKoin(appModule: Module = module { }): KoinApplication = startKoin {
         repositoryModule,
         domainModule,
         viewModelModule,
+        provideHttpClientModule
     )
 }

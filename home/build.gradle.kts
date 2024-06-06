@@ -28,6 +28,7 @@ kotlin {
     sourceSets {
         androidMain.dependencies {
             implementation(libs.koin.android)
+            implementation(libs.ktor.client.android)
         }
         commonMain.dependencies {
             implementation(projects.domain)
@@ -48,9 +49,10 @@ kotlin {
             implementation(libs.coil.ktor)
             implementation(libs.compose.material3.multiplatform)
             implementation(libs.androidx.navigation)
+            implementation(libs.ktor.client.content.negotiation)
         }
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
+        iosMain.dependencies {
+            implementation(libs.ktor.client.darwin)
         }
     }
 }

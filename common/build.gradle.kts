@@ -16,7 +16,7 @@ kotlin {
             }
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -31,6 +31,7 @@ kotlin {
     sourceSets {
         androidMain.dependencies {
             implementation(libs.koin.android)
+            implementation(libs.ktor.client.android)
         }
         commonMain.dependencies {
             implementation(projects.database)
@@ -51,9 +52,11 @@ kotlin {
             implementation(libs.kotlinx.serialization)
             implementation(libs.viewmode.compose)
             implementation(libs.compose.material3.multiplatform)
+            implementation(libs.ktor.client.content.negotiation)
+
         }
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
+        iosMain.dependencies {
+            implementation(libs.ktor.client.darwin)
         }
     }
 }
