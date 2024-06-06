@@ -1,4 +1,4 @@
-package org.dtcm.work.common.data
+package org.dtcm.work.common.data.data
 
 import kotlinx.serialization.Serializable
 

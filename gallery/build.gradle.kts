@@ -13,41 +13,47 @@ kotlin {
             }
         }
     }
-
+    
     listOf(
         iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "navigationcomposables"
+            baseName = "gallery"
             isStatic = true
         }
     }
 
     sourceSets {
-        commonMain.dependencies {
-            implementation(projects.navigationroute)
-            implementation(projects.home)
-            implementation(projects.gallery)
-
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
-            implementation(libs.androidx.navigation)
-            implementation(libs.compose.material3.multiplatform)
-            implementation(libs.cupertino)
+        androidMain.dependencies {
+            implementation(libs.koin.android)
+            implementation(libs.ktor.client.android)
         }
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
+        commonMain.dependencies {
+            implementation(projects.domain)
+            implementation(projects.database)
+            implementation(projects.design)
+            implementation(projects.common)
+            implementation(projects.navigationroute)
+            implementation(libs.koin.compose)
+            implementation(libs.koin.core)
+            implementation(libs.viewmode.compose)
+            implementation(libs.coil)
+            implementation(libs.coil.compose)
+            implementation(libs.coil.ktor)
+            implementation(libs.compose.material3.multiplatform)
+            implementation(libs.androidx.navigation)
+            implementation(libs.ktor.client.content.negotiation)
+        }
+        iosMain.dependencies {
+            implementation(libs.ktor.client.darwin)
         }
     }
 }
 
 android {
-    namespace = "org.dtcm.work.navigationcomposables"
+    namespace = "org.dtcm.work.gallery"
     compileSdk = 34
     defaultConfig {
         minSdk = 24
@@ -56,13 +62,4 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    buildFeatures {
-        compose = true
-    }
-    compose.resources {
-        publicResClass = true
-        packageOfResClass = "org.diploma.navigationcomposables"
-        generateResClass = always
-    }
-
 }

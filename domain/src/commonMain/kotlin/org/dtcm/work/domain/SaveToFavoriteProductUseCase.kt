@@ -1,6 +1,6 @@
 package org.dtcm.work.domain
 
-import org.dtcm.work.common.data.FavoriteProduct
+import org.dtcm.work.common.data.data.FavoriteProduct
 import org.dtcm.work.repository.FavoriteProductsRepository
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject

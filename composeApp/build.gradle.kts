@@ -53,8 +53,9 @@ kotlin {
             implementation(projects.repository)
             implementation(projects.domain)
             implementation(projects.common)
-            implementation(projects.home)
             implementation(projects.navigationcomposables)
+            implementation(projects.home)
+            implementation(projects.gallery)
 
             implementation(compose.runtime)
             implementation(compose.foundation)

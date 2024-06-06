@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import org.dtcm.work.gallery.GalleryScreen
 import org.dtcm.work.home.domain.HomeScreen
 import org.dtcm.work.home.domain.news.NewsDetailScreen
 import org.dtcm.work.navigationroute.ScreenRoute.FAVORITE
@@ -62,6 +63,6 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController) {
             },
         ),
     ) {
-        //  GalleryScreen(navController = navController)
+          GalleryScreen(navController = navController)
     }
 }

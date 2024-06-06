@@ -1,8 +1,7 @@
 package org.dtcm.work.domain
 
-import org.dtcm.work.common.data.BookedProduct
+import org.dtcm.work.common.data.data.BookedProduct
 import org.dtcm.work.repository.BookedProductsRepository
-import org.koin.compose.koinInject
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 

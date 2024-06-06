@@ -7,10 +7,10 @@ import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
-import org.dtcm.work.common.data.AllProductsItem
-import org.dtcm.work.common.data.AllProductsList
-import org.dtcm.work.common.data.BrandsItem
-import org.dtcm.work.common.data.BrandsList
+import org.dtcm.work.common.data.data.AllProductsItem
+import org.dtcm.work.common.data.data.AllProductsList
+import org.dtcm.work.common.data.data.BrandsItem
+import org.dtcm.work.common.data.data.BrandsList
 import org.dtcm.work.database.AppDatabase
 import org.dtcm.work.database.entities.AllProductsListEntity
 import org.dtcm.work.database.entities.BrandsListEntity
@@ -18,9 +18,10 @@ import org.dtcm.work.repository.firebasehelper.fetchFromDatabase
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class AllProductsRepository: KoinComponent {
-    private val firebaseDatabase: FirebaseDatabase by inject()
-    private val roomDb: AppDatabase by inject()
+class AllProductsRepository(
+    private val firebaseDatabase: FirebaseDatabase,
+    private val roomDb: AppDatabase
+) {
     suspend fun fetchAndSaveAllProductsFromFirebase() {
         fetchFromDatabase<AllProductsList>(
             "home/allProducts",

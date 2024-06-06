@@ -7,17 +7,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
-import org.dtcm.work.common.data.NewsInfo
-import org.dtcm.work.common.data.NewsItem
-import org.dtcm.work.common.data.RecommendationItem
-import org.dtcm.work.common.data.RecommendationsList
-import org.dtcm.work.common.data.TopProductItem
-import org.dtcm.work.common.data.TopProductsList
+import org.dtcm.work.common.data.data.NewsInfo
+import org.dtcm.work.common.data.data.NewsItem
+import org.dtcm.work.common.data.data.RecommendationItem
+import org.dtcm.work.common.data.data.RecommendationsList
+import org.dtcm.work.common.data.data.TopProductItem
+import org.dtcm.work.common.data.data.TopProductsList
 import org.dtcm.work.database.AppDatabase
 import org.dtcm.work.database.entities.NewsInfoEntity
 import org.dtcm.work.database.entities.TopProductsListEntity
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 import org.dtcm.work.repository.firebasehelper.fetchFromDatabase
 
 private const val AMOUNT_OF_TOP_PRODUCTS_IN_HOME_SCREEN = 5

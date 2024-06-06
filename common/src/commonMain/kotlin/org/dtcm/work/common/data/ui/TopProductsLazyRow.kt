@@ -10,9 +10,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Card
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
 import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -27,7 +27,7 @@ import coil3.compose.AsyncImage
 import org.diploma.work.common.Res
 import org.diploma.work.common.productsSalePercentage
 import org.diploma.work.common.topProductsTitle
-import org.dtcm.work.common.data.TopProductItem
+import org.dtcm.work.common.data.data.TopProductItem
 import org.dtcm.work.design.normal100
 import org.dtcm.work.design.small100
 import org.dtcm.work.design.small50
@@ -45,7 +45,7 @@ fun TopProductsLazyRow(
     Column(modifier = modifier) {
         Text(
             text = stringResource(Res.string.topProductsTitle),
-            modifier = Modifier.padding(normal100),
+            modifier = Modifier.padding(start = normal100, top = normal100),
             fontWeight = FontWeight.Bold,
         )
         LazyRow {
@@ -71,7 +71,7 @@ fun TopProducts(
     Card(
         onClick = { topProductsItem.id?.let { productOnClick.invoke(it.toString()) } },
         modifier = modifier.padding(normal100),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colors.surface),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceTint),
     ) {
         Column(
             horizontalAlignment = Alignment.Start,
@@ -99,7 +99,7 @@ fun TopProducts(
                         .align(Alignment.TopEnd)
                         .padding(top = small50, end = small50)
                         .background(
-                            color = MaterialTheme.colors.error,
+                            color = MaterialTheme.colorScheme.error,
                             shape = RoundedCornerShape(topEnd = small100),
                         )
                         .padding(small50),

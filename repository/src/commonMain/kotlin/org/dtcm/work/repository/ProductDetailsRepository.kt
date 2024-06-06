@@ -3,13 +3,12 @@ package org.dtcm.work.repository
 import Converters
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
-import org.dtcm.work.common.data.ProductDetailsData
+import org.dtcm.work.common.data.data.ProductDetailsData
 import org.dtcm.work.database.AppDatabase
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class ProductDetailsRepository : KoinComponent {
-    private val roomDb: AppDatabase by inject()
+class ProductDetailsRepository(private val roomDb: AppDatabase) {
     fun getTopProductDetails(productId: String) =
         roomDb.productDao().getTopProductDetail(productId).map {
             ProductDetailsData(

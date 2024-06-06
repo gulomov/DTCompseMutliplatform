@@ -78,7 +78,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":design"))
     implementation(libs.androidx.ui.android)
     implementation(libs.androidx.foundation.layout.android)
 }

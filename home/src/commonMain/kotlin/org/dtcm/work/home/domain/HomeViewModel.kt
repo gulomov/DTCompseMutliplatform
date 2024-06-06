@@ -5,9 +5,9 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import org.dtcm.work.common.data.NewsItem
-import org.dtcm.work.common.data.RecommendationItem
-import org.dtcm.work.common.data.TopProductItem
+import org.dtcm.work.common.data.data.NewsItem
+import org.dtcm.work.common.data.data.RecommendationItem
+import org.dtcm.work.common.data.data.TopProductItem
 import org.dtcm.work.domain.FetchAllProductsFromFirebaseAndSaveUseCase
 import org.dtcm.work.domain.FetchNewsFromFirebaseAndSaveUseCase
 import org.dtcm.work.domain.FetchRecommendationsFromFirebaseAndSaveUseCase

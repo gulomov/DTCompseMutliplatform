@@ -43,10 +43,7 @@ fun HomeScreen(
             Spacer(modifier = Modifier.height(normal100))
         }
         item {
-            TopProductsLazyRow(
-                productList = topProducts,
-                navController = navController,
-            )
+            TopProductsLazyRow(productList = topProducts, navController = navController)
         }
     }
 
