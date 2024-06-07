@@ -30,6 +30,7 @@ uiAndroid = "1.6.7"
 material3Android = "1.2.1"
 ktor = "2.3.11"
 cupertino = "0.1.0-alpha04"
+datetime = "0.6.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -86,6 +87,8 @@ ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negoti
 #CUPIRTINO
 cupertino = { module = "io.github.alexzhirkevich:cupertino-adaptive", version.ref = "cupertino" }
 
+#DATETIME
+datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref ="datetime" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

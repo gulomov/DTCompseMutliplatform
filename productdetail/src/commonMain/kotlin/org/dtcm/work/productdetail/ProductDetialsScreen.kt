@@ -15,6 +15,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
+import org.dtcm.work.booking.BookingScreen
 import org.dtcm.work.common.data.createSavedStateHandle
 import org.dtcm.work.common.data.ui.TopProductsLazyRow
 import org.dtcm.work.design.MainButton
@@ -36,7 +37,6 @@ fun ProductDetails(
 ) {
     val savedStateHandle = remember { createSavedStateHandle(mapOf("productId" to productId)) }
     val viewModel: ProductDetailsViewModel = koinInject { parametersOf(savedStateHandle) }
-    //val context = LocalContext.current
     val productDetails by viewModel.productDetails.collectAsState()
     val topProducts by viewModel.topProductsList.collectAsState()
     val isProductSavedIntoFavorites by viewModel.isProductInFavorites.collectAsState()
@@ -47,22 +47,22 @@ fun ProductDetails(
         viewModel.getTopProductsList()
     }
 
-    /*if (startBookingLogic) {
+    if (startBookingLogic) {
         if (isProductBooked)
             BookingScreen(
                 onCloseBooking = { viewModel.checkIfProductBooked() },
-                productId = productDetails.id ?: 0,
+                productId = productId.toInt(),
                 showBottomSheet = true,
                 showDatePicker = false,
             ) else {
             BookingScreen(
                 onCloseBooking = { viewModel.checkIfProductBooked() },
-                productId = productDetails.id ?: 0,
+                productId = productId.toInt(),
                 showBottomSheet = false,
                 showDatePicker = true,
             )
         }
-    }*/
+    }
 
     productDetails.images?.let { data ->
         Column(

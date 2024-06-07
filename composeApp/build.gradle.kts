@@ -58,6 +58,7 @@ kotlin {
             implementation(projects.gallery)
             implementation(projects.favorites)
             implementation(projects.productdetail)
+            implementation(projects.booking)
 
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -78,6 +79,7 @@ kotlin {
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.serialization.json)
             implementation(libs.cupertino)
+            implementation(libs.datetime)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)

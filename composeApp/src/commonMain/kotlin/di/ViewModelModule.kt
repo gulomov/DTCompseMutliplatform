@@ -1,6 +1,7 @@
 package di
 
 import androidx.lifecycle.SavedStateHandle
+import org.dtcm.work.booking.BookingScreenViewModel
 import org.dtcm.work.common.data.viewModelDefinition
 import org.dtcm.work.favorites.FavoritesViewModel
 import org.dtcm.work.gallery.GalleryScreenViewModel
@@ -46,4 +47,5 @@ val viewModelModule = module {
             get(),
         )
     }
+    viewModelDefinition { BookingScreenViewModel(get(),get()) }
 }
