@@ -49,7 +49,7 @@ internal fun DataPicker(
                 enabled = true
                 /*datePickerState.selectedDateMillis?.let { selectedDate ->
                     selectedDate >= currentTimeMillis
-                } == true*/ // TODO: Find out why not working. 
+                } == true*/ // TODO: Find out why not working.
 
             ) {
                 Text(text = stringResource(Res.string.data_picker_confirm_button))

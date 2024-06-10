@@ -29,6 +29,7 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.koin.android)
             implementation(libs.ktor.client.android)
+            implementation(libs.androidx.core.ktx)
         }
         commonMain.dependencies {
             implementation(projects.domain)

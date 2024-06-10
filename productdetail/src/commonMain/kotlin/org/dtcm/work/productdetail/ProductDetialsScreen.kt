@@ -25,6 +25,8 @@ import org.dtcm.work.productdetail.composables.PriceAndBooking
 import org.dtcm.work.productdetail.composables.ProductDetailsImages
 import org.dtcm.work.productdetail.composables.ProductSize
 import org.dtcm.work.productdetail.composables.ProductTitleAndSale
+import org.dtcm.work.productdetail.helper.getPlatformContext
+import org.dtcm.work.productdetail.helper.openInMaps
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
@@ -35,6 +37,8 @@ fun ProductDetails(
     navController: NavController,
     modifier: Modifier = Modifier,
 ) {
+    val context = getPlatformContext()
+
     val savedStateHandle = remember { createSavedStateHandle(mapOf("productId" to productId)) }
     val viewModel: ProductDetailsViewModel = koinInject { parametersOf(savedStateHandle) }
     val productDetails by viewModel.productDetails.collectAsState()
@@ -46,6 +50,7 @@ fun ProductDetails(
     LaunchedEffect(Unit) {
         viewModel.getTopProductsList()
     }
+
 
     if (startBookingLogic) {
         if (isProductBooked)
@@ -117,7 +122,7 @@ fun ProductDetails(
                 modifier = Modifier
                     .padding(normal100)
                     .fillMaxWidth(),
-                onClick = { /*openGoogleMaps(context, productDetails.address.orEmpty()) */ },
+                onClick = { openInMaps(context, productDetails.address.orEmpty()) },
                 content = {
                     Text(text = stringResource(Res.string.show_in_the_map))
                 },
@@ -129,12 +134,3 @@ fun ProductDetails(
         }
     }
 }
-
-/*
-private fun openGoogleMaps(content: Context, address: String) = address.let {
-    val intentUri = Uri.parse("geo:0,0?q=${Uri.encode(address)}")
-    val mapIntent = Intent(Intent.ACTION_VIEW, intentUri)
-    mapIntent.setPackage("com.google.android.apps.maps")
-    content.startActivity(mapIntent)
-}
-*/

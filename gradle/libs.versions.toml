@@ -88,7 +88,8 @@ ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negoti
 cupertino = { module = "io.github.alexzhirkevich:cupertino-adaptive", version.ref = "cupertino" }
 
 #DATETIME
-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref ="datetime" }
+datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "datetime" }
+
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
