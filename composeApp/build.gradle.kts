@@ -59,6 +59,7 @@ kotlin {
             implementation(projects.favorites)
             implementation(projects.productdetail)
             implementation(projects.booking)
+            implementation(projects.datastore)
 
             implementation(compose.runtime)
             implementation(compose.foundation)
