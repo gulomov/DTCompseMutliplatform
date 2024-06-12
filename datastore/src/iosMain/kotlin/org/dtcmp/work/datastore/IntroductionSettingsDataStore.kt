@@ -1,4 +1,4 @@
-package org.dtcm.work.datastore
+package org.dtcmp.work.datastore
 
 import platform.Foundation.NSUserDefaults
 

@@ -1,7 +1,6 @@
 package di
 
 import org.dtcm.work.database.di.databaseModule
-import org.dtcm.work.datastore.di.platformDatastoreModule
 import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
@@ -16,6 +15,5 @@ fun initKoin(appModule: Module = module { }): KoinApplication = startKoin {
         domainModule,
         viewModelModule,
         provideHttpClientModule,
-        platformDatastoreModule
     )
 }

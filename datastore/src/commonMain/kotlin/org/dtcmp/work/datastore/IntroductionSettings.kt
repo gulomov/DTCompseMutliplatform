@@ -1,4 +1,4 @@
-package org.dtcm.work.datastore
+package org.dtcmp.work.datastore
 
 interface IntroductionSettings {
     suspend fun wasIntroductionShown(key: String, defaultValue: Boolean = false): Boolean

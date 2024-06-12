@@ -49,9 +49,10 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(projects.database)
+            implementation(projects.datastore)
             implementation(projects.design)
-            implementation(projects.repository)
             implementation(projects.domain)
+            implementation(projects.repository)
             implementation(projects.common)
             implementation(projects.navigationcomposables)
             implementation(projects.home)
@@ -59,7 +60,6 @@ kotlin {
             implementation(projects.favorites)
             implementation(projects.productdetail)
             implementation(projects.booking)
-            implementation(projects.datastore)
 
             implementation(compose.runtime)
             implementation(compose.foundation)
