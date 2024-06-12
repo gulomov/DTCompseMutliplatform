@@ -14,5 +14,5 @@ val repositoryModule = module {
     factory { AllProductsRepository(get(), get()) }
     factory { BookedProductsRepository(get()) }
     factory { FavoriteProductsRepository(get()) }
-    factory { IntroductionRepository() }
+    factory { IntroductionRepository(get()) }
 }

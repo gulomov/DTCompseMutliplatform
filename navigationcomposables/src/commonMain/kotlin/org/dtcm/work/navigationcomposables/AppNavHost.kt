@@ -97,6 +97,7 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
             startDestination = HOME,
             modifier = Modifier.padding(it),
         ) {
+            introductionGraph(navController)
             mainGraph(navController)
         }
     }

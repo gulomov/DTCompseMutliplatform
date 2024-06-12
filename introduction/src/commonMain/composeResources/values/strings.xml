@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="introduction_welcome_title">Step into the World of Savings</string>
+    <string name="introduction_welcome_text">Discover incredible discounts and unbeatable deals</string>
+    <string name="introduction_sales_info_title">Unleash the Shopaholic in You</string>
+    <string name="introduction_sales_info_text">Everything you desire, now at discounted prices</string>
+    <string name="introduction_enjoy_your_time_title">Shop, Smile, Repeat</string>
+    <string name="introduction_enjoy_your_time_text">Your shopping journey begins now – buckle up!</string>
+    <string name="introduction_button_previous">Previous</string>
+    <string name="introduction_button_next">Next</string>
+    <string name="introduction_button_start">Start</string>
+    <string name="introduction_button_finish">Finish</string>
+    <string name="app_name">DiplomaThesis</string>
+    <string name="bottom_nav_home">Home</string>
+    <string name="bottom_nav_favorite">Favorite</string>
+    <string name="bottom_nav_gallery">Gallery</string>
+    <string name="homeScreenNewsTitle">News</string>
+    <string name="homeScreenRecommendationsTitle">Recommendations</string>
+    <string name="homeScreenTopProductsTitle">Top Products</string>
+</resources>

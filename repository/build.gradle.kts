@@ -29,6 +29,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(projects.database)
+            implementation(projects.datastore)
             implementation(projects.common)
 
             implementation(compose.runtime)

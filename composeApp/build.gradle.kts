@@ -56,6 +56,7 @@ kotlin {
             implementation(projects.common)
             implementation(projects.navigationcomposables)
             implementation(projects.home)
+            implementation(projects.introduction)
             implementation(projects.gallery)
             implementation(projects.favorites)
             implementation(projects.productdetail)

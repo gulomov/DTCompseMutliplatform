@@ -20,28 +20,39 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "navigationcomposables"
+            baseName = "introduction"
             isStatic = true
         }
     }
 
     sourceSets {
+        androidMain.dependencies {
+            implementation(libs.koin.android)
+            implementation(libs.ktor.client.android)
+        }
         commonMain.dependencies {
+            implementation(projects.database)
+            implementation(projects.datastore)
+            implementation(projects.domain)
+            implementation(projects.design)
+            implementation(projects.repository)
+            implementation(projects.common)
             implementation(projects.navigationroute)
-            implementation(projects.home)
-            implementation(projects.introduction)
-            implementation(projects.gallery)
-            implementation(projects.favorites)
-            implementation(projects.productdetail)
 
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material)
             implementation(compose.ui)
             implementation(compose.components.resources)
-            implementation(libs.androidx.navigation)
+            implementation(libs.viewmode.compose)
+            implementation(libs.koin.compose)
+            implementation(libs.koin.core)
+            implementation(libs.coil)
+            implementation(libs.coil.compose)
+            implementation(libs.coil.ktor)
             implementation(libs.compose.material3.multiplatform)
-            implementation(libs.cupertino)
+            implementation(libs.androidx.navigation)
+            implementation(libs.ktor.client.content.negotiation)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -50,22 +61,21 @@ kotlin {
 }
 
 android {
-    namespace = "org.dtcm.work.navigationcomposables"
+    namespace = "org.dtcm.work.introduction"
     compileSdk = 34
     defaultConfig {
         minSdk = 24
+    }
+    buildFeatures {
+        compose = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    buildFeatures {
-        compose = true
-    }
     compose.resources {
         publicResClass = true
-        packageOfResClass = "org.diploma.navigationcomposables"
+        packageOfResClass = "org.dtcm.work.introduction"
         generateResClass = always
     }
-
 }
