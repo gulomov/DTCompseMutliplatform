@@ -1,5 +1,7 @@
 package org.dtcm.work.navigationcomposables
 
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
@@ -96,6 +98,8 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
             navController = navController,
             startDestination = INTRO_SPLASH,
             modifier = Modifier.padding(it),
+            enterTransition = { EnterTransition.None},
+            exitTransition = { ExitTransition.None }
         ) {
             splashGraph(navController)
             introductionGraph(navController)

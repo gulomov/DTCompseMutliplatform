@@ -1,5 +1,11 @@
 package org.dtcm.work.navigationcomposables
 
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -19,11 +25,37 @@ import org.dtcm.work.home.domain.recommendations.RecommendationsDetail
 import org.dtcm.work.productdetail.ProductDetails
 
 fun NavGraphBuilder.mainGraph(navController: NavHostController) {
-    composable(HOME) {
+    composable(
+        HOME,
+        enterTransition = {
+            slideIntoContainer(
+                animationSpec = tween(300, easing = FastOutSlowInEasing),
+                towards = AnimatedContentTransitionScope.SlideDirection.Left
+            )
+        },
+        exitTransition = {
+            slideOutOfContainer(
+                animationSpec = tween(300, easing = FastOutSlowInEasing),
+                towards = AnimatedContentTransitionScope.SlideDirection.Left
+            )
+        }
+    ) {
         HomeScreen(navController = navController)
     }
     composable(
         route = PRODUCTION_DETAIL,
+        enterTransition = {
+            slideIntoContainer(
+                animationSpec = tween(300, easing = FastOutSlowInEasing),
+                towards = AnimatedContentTransitionScope.SlideDirection.Left
+            )
+        },
+        exitTransition = {
+            slideOutOfContainer(
+                animationSpec = tween(300, easing = FastOutSlowInEasing),
+                towards = AnimatedContentTransitionScope.SlideDirection.Left
+            )
+        },
         arguments = listOf(
             navArgument("productId") {
                 type = NavType.StringType
@@ -35,6 +67,18 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController) {
     }
     composable(
         route = NEWS_DETAILS,
+        enterTransition = {
+            slideIntoContainer(
+                animationSpec = tween(300, easing = FastOutSlowInEasing),
+                towards = AnimatedContentTransitionScope.SlideDirection.Left
+            )
+        },
+        exitTransition = {
+            slideOutOfContainer(
+                animationSpec = tween(300, easing = FastOutSlowInEasing),
+                towards = AnimatedContentTransitionScope.SlideDirection.Left
+            )
+        },
         arguments = listOf(
             navArgument("newsId") {
                 type = NavType.IntType
@@ -46,6 +90,18 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController) {
     }
     composable(
         route = RECOMMENDATION_DETAILS,
+        enterTransition = {
+            slideIntoContainer(
+                animationSpec = tween(300, easing = FastOutSlowInEasing),
+                towards = AnimatedContentTransitionScope.SlideDirection.Left
+            )
+        },
+        exitTransition = {
+            slideOutOfContainer(
+                animationSpec = tween(300, easing = FastOutSlowInEasing),
+                towards = AnimatedContentTransitionScope.SlideDirection.Left
+            )
+        },
         arguments = listOf(
             navArgument("brandName") {
                 type = NavType.StringType
@@ -55,12 +111,38 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController) {
         val brandName = it.arguments?.getString("brandName").orEmpty()
         RecommendationsDetail(brandName = brandName, navController = navController)
     }
-    composable(FAVORITE) {
+    composable(
+        FAVORITE,
+        enterTransition = {
+            slideIntoContainer(
+                animationSpec = tween(300, easing = FastOutSlowInEasing),
+                towards = AnimatedContentTransitionScope.SlideDirection.Left
+            )
+        },
+        exitTransition = {
+            slideOutOfContainer(
+                animationSpec = tween(300, easing = FastOutSlowInEasing),
+                towards = AnimatedContentTransitionScope.SlideDirection.Left
+            )
+        },
+    ) {
         FavoritesScreen(navController = navController)
     }
 
     composable(
         route = GALLERY,
+        enterTransition = {
+            slideIntoContainer(
+                animationSpec = tween(300, easing = FastOutSlowInEasing),
+                towards = AnimatedContentTransitionScope.SlideDirection.Left
+            )
+        },
+        exitTransition = {
+            slideOutOfContainer(
+                animationSpec = tween(300, easing = FastOutSlowInEasing),
+                towards = AnimatedContentTransitionScope.SlideDirection.Left
+            )
+        },
         arguments = listOf(
             navArgument("brand") {
                 type = NavType.StringType

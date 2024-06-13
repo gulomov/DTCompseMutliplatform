@@ -26,6 +26,7 @@ fun BottomNavigationBar(navController: NavController) {
                     navController.navigate(sections.route) {
                         popUpTo(navController.graph.startDestinationRoute.toString())
                         launchSingleTop = true
+                        restoreState = true
 
                     }
                 },
