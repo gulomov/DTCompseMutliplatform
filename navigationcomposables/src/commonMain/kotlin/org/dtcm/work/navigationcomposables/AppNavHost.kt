@@ -14,14 +14,14 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import io.github.alexzhirkevich.cupertino.adaptive.AdaptiveScaffold
 import io.github.alexzhirkevich.cupertino.adaptive.ExperimentalAdaptiveApi
-import org.dtcm.work.navigationroute.ScreenRoute.FAVORITE
-import org.dtcm.work.navigationroute.ScreenRoute.GALLERY
-import org.dtcm.work.navigationroute.ScreenRoute.HOME
-import org.dtcm.work.navigationroute.ScreenRoute.INTRODUCTION
-import org.dtcm.work.navigationroute.ScreenRoute.INTRO_SPLASH
-import org.dtcm.work.navigationroute.ScreenRoute.NEWS_DETAILS
-import org.dtcm.work.navigationroute.ScreenRoute.PRODUCTION_DETAIL
-import org.dtcm.work.navigationroute.ScreenRoute.RECOMMENDATION_DETAILS
+import org.dtcm.work.common.data.navigation.ScreenRoute.FAVORITE
+import org.dtcm.work.common.data.navigation.ScreenRoute.GALLERY
+import org.dtcm.work.common.data.navigation.ScreenRoute.HOME
+import org.dtcm.work.common.data.navigation.ScreenRoute.INTRODUCTION
+import org.dtcm.work.common.data.navigation.ScreenRoute.INTRO_SPLASH
+import org.dtcm.work.common.data.navigation.ScreenRoute.NEWS_DETAILS
+import org.dtcm.work.common.data.navigation.ScreenRoute.PRODUCTION_DETAIL
+import org.dtcm.work.common.data.navigation.ScreenRoute.RECOMMENDATION_DETAILS
 
 @OptIn(ExperimentalAdaptiveApi::class)
 @Composable

@@ -35,7 +35,6 @@ kotlin {
             implementation(projects.database)
             implementation(projects.design)
             implementation(projects.common)
-            implementation(projects.navigationroute)
             implementation(libs.koin.compose)
             implementation(libs.koin.core)
             implementation(libs.viewmode.compose)

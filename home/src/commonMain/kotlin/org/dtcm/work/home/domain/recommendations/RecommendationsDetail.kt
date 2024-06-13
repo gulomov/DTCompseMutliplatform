@@ -13,8 +13,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import org.dtcm.work.common.data.createSavedStateHandle
+import org.dtcm.work.common.data.navigation.ScreenRoute
 import org.dtcm.work.design.GRID_CELLS
-import org.dtcm.work.navigationroute.ScreenRoute
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 
@@ -42,11 +42,10 @@ fun RecommendationsDetail(
                     GenericProductItem(
                         item = product,
                         onClick = {
-                            val route =
-                                ScreenRoute.PRODUCTION_DETAIL.replace(
-                                    "{productId}",
-                                    it.id.toString()
-                                )
+                            val route = ScreenRoute.PRODUCTION_DETAIL.replace(
+                                "{productId}",
+                                it.id.toString()
+                            )
                             navController.navigate(route)
                         },
                         onSaveOrDeleteClick = {

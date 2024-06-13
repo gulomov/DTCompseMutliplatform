@@ -27,13 +27,13 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(projects.navigationroute)
             implementation(projects.home)
             implementation(projects.introduction)
             implementation(projects.gallery)
             implementation(projects.favorites)
             implementation(projects.productdetail)
             implementation(projects.splashscreen)
+            implementation(projects.common)
 
             implementation(compose.runtime)
             implementation(compose.foundation)

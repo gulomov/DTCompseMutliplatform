@@ -16,9 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.navigation.NavController
 import kotlinx.coroutines.delay
-import org.dtcm.work.navigationroute.ScreenRoute.HOME
-import org.dtcm.work.navigationroute.ScreenRoute.INTRODUCTION
-import org.dtcm.work.navigationroute.ScreenRoute.INTRO_SPLASH
+import org.dtcm.work.common.data.navigation.ScreenRoute.HOME
+import org.dtcm.work.common.data.navigation.ScreenRoute.INTRODUCTION
+import org.dtcm.work.common.data.navigation.ScreenRoute.INTRO_SPLASH
 import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.koinInject
 

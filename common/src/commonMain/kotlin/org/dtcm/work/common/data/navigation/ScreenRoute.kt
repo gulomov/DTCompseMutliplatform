@@ -1,4 +1,4 @@
-package org.dtcm.work.navigationroute
+package org.dtcm.work.common.data.navigation
 
 object ScreenRoute {
     const val INTRO_ROUTE = "intro"

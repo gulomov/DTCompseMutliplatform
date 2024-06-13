@@ -37,7 +37,6 @@ kotlin {
             implementation(projects.design)
             implementation(projects.repository)
             implementation(projects.common)
-            implementation(projects.navigationroute)
 
             implementation(compose.runtime)
             implementation(compose.foundation)

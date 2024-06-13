@@ -13,11 +13,11 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import org.dtcm.work.common.data.data.AllProductsItem
 import org.dtcm.work.common.data.data.BrandsItem
+import org.dtcm.work.common.data.navigation.ScreenRoute
 import org.dtcm.work.common.data.ui.EmptyStateImage
 import org.dtcm.work.design.GRID_CELLS
 import org.dtcm.work.design.normal100
 import org.dtcm.work.gallery.GalleryScreenViewModel
-import org.dtcm.work.navigationroute.ScreenRoute
 
 
 @Composable

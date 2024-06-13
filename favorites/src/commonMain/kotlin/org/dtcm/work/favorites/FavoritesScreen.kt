@@ -13,10 +13,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
+import org.dtcm.work.common.data.navigation.ScreenRoute.PRODUCTION_DETAIL
 import org.dtcm.work.common.data.ui.EmptyStateImage
 import org.dtcm.work.design.GRID_CELLS
 import org.dtcm.work.design.normal100
-import org.dtcm.work.navigationroute.ScreenRoute.PRODUCTION_DETAIL
 import org.koin.compose.koinInject
 
 @Composable

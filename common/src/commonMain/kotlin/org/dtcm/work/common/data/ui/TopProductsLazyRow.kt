@@ -26,6 +26,7 @@ import androidx.navigation.NavController
 import coil3.compose.AsyncImage
 import org.dtcm.work.common.Res
 import org.dtcm.work.common.data.data.TopProductItem
+import org.dtcm.work.common.data.navigation.ScreenRoute.PRODUCTION_DETAIL
 import org.dtcm.work.common.productsSalePercentage
 import org.dtcm.work.common.topProductsTitle
 import org.dtcm.work.design.normal100
@@ -33,7 +34,6 @@ import org.dtcm.work.design.small100
 import org.dtcm.work.design.small50
 import org.dtcm.work.design.topProductsImageHeightSize
 import org.dtcm.work.design.topProductsImageWidthSize
-import org.dtcm.work.navigationroute.ScreenRoute.PRODUCTION_DETAIL
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

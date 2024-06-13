@@ -5,17 +5,17 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import org.dtcm.work.common.data.navigation.ScreenRoute.FAVORITE
+import org.dtcm.work.common.data.navigation.ScreenRoute.GALLERY
+import org.dtcm.work.common.data.navigation.ScreenRoute.HOME
+import org.dtcm.work.common.data.navigation.ScreenRoute.NEWS_DETAILS
+import org.dtcm.work.common.data.navigation.ScreenRoute.PRODUCTION_DETAIL
+import org.dtcm.work.common.data.navigation.ScreenRoute.RECOMMENDATION_DETAILS
 import org.dtcm.work.favorites.FavoritesScreen
 import org.dtcm.work.gallery.GalleryScreen
 import org.dtcm.work.home.domain.HomeScreen
 import org.dtcm.work.home.domain.news.NewsDetailScreen
 import org.dtcm.work.home.domain.recommendations.RecommendationsDetail
-import org.dtcm.work.navigationroute.ScreenRoute.FAVORITE
-import org.dtcm.work.navigationroute.ScreenRoute.GALLERY
-import org.dtcm.work.navigationroute.ScreenRoute.HOME
-import org.dtcm.work.navigationroute.ScreenRoute.NEWS_DETAILS
-import org.dtcm.work.navigationroute.ScreenRoute.PRODUCTION_DETAIL
-import org.dtcm.work.navigationroute.ScreenRoute.RECOMMENDATION_DETAILS
 import org.dtcm.work.productdetail.ProductDetails
 
 fun NavGraphBuilder.mainGraph(navController: NavHostController) {

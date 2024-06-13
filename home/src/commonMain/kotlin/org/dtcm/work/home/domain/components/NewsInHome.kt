@@ -19,13 +19,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
 import coil3.compose.AsyncImage
 import org.dtcm.work.common.data.data.NewsItem
+import org.dtcm.work.common.data.navigation.ScreenRoute
 import org.dtcm.work.design.SlidingCarousel
 import org.dtcm.work.design.newsCarouselImageSize
 import org.dtcm.work.design.normal100
 import org.dtcm.work.design.small100
 import org.dtcm.work.home.Res
 import org.dtcm.work.home.homeScreenNewsTitle
-import org.dtcm.work.navigationroute.ScreenRoute
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

@@ -5,7 +5,7 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.ui.graphics.vector.ImageVector
-import org.dtcm.work.navigationroute.ScreenRoute
+import org.dtcm.work.common.data.navigation.ScreenRoute
 import org.jetbrains.compose.resources.StringResource
 
 sealed class BottomNavItem(

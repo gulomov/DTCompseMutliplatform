@@ -31,7 +31,6 @@ dependencyResolutionManagement {
 include(":composeApp")
 include(":database")
 include(":design")
-include(":navigationroute")
 include(":navigationcomposables")
 include(":home")
 include(":repository")

@@ -15,14 +15,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
+import org.dtcm.work.common.data.navigation.ScreenRoute.HOME
+import org.dtcm.work.common.data.navigation.ScreenRoute.INTRODUCTION
 import org.dtcm.work.design.large100
 import org.dtcm.work.design.normal100
 import org.dtcm.work.design.small100
 import org.dtcm.work.introduction.components.IntroductionContent
 import org.dtcm.work.introduction.components.PagerButtons
 import org.dtcm.work.introduction.components.PagerIndicators
-import org.dtcm.work.navigationroute.ScreenRoute.HOME
-import org.dtcm.work.navigationroute.ScreenRoute.INTRODUCTION
 import org.koin.compose.koinInject
 
 private const val PAGER_COUNT = 3

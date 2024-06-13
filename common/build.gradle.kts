@@ -36,7 +36,6 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.database)
             implementation(projects.design)
-            implementation(projects.navigationroute)
 
             implementation(compose.runtime)
             implementation(compose.foundation)
