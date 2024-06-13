@@ -1,16 +1,6 @@
 # DTComposeMultiplatform
 
 This is a Compose Multiplatform application developed as part of a diploma thesis. The application leverages modern Kotlin Multiplatform capabilities to create a shared codebase for Android and iOS, utilizing Jetpack Compose for UI.
-
-## Technologies Used
-
-- **Kotlin Multiplatform**: Share common business logic across Android and iOS.
-- **Jetpack Compose**: Modern UI toolkit for building native UI on Android and beyond.
-- **Koin**: Dependency injection framework for Kotlin.
-- **Coroutines and Flow**: For asynchronous programming.
-- **Detekt**: Static code analysis tool for Kotlin.
-- **MockK**: Mocking library for Kotlin.
-
 ## Application Structure
 
 ### Modules
@@ -32,7 +22,6 @@ The application is structured into multiple modules to separate concerns and enh
 13. **splashscreen**: The splash screen module.
 14. **datastore**: Manages data storage using Jetpack DataStore.
 15. **booking**: Handles booking-related functionality.
-
 
 ```
 DTComposeMultiplatform/
