@@ -94,9 +94,10 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
     ) {
         NavHost(
             navController = navController,
-            startDestination = HOME,
+            startDestination = INTRO_SPLASH,
             modifier = Modifier.padding(it),
         ) {
+            splashGraph(navController)
             introductionGraph(navController)
             mainGraph(navController)
         }

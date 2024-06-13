@@ -10,6 +10,7 @@ import org.dtcm.work.home.domain.news.NewsDetailViewModel
 import org.dtcm.work.home.domain.recommendations.RecommendationsDetailViewModel
 import org.dtcm.work.introduction.IntroductionViewModel
 import org.dtcm.work.productdetail.ProductDetailsViewModel
+import org.dtcm.work.splashscreen.SplashScreenViewModel
 import org.koin.dsl.module
 
 val viewModelModule = module {
@@ -50,4 +51,5 @@ val viewModelModule = module {
     }
     viewModelDefinition { BookingScreenViewModel(get(),get()) }
     viewModelDefinition { IntroductionViewModel(get()) }
+    viewModelDefinition { SplashScreenViewModel(get()) }
 }

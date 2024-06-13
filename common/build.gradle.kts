@@ -76,7 +76,7 @@ android {
     }
     compose.resources {
         publicResClass = true
-        packageOfResClass = "org.diploma.work.common"
+        packageOfResClass = "org.dtcm.work.common"
         generateResClass = always
     }
 }

@@ -19,9 +19,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import org.diploma.work.common.Res
-import org.diploma.work.common.ic_bookmark
-import org.diploma.work.common.ic_bookmark_border
+import org.dtcm.work.common.Res
+import org.dtcm.work.common.ic_bookmark
+import org.dtcm.work.common.ic_bookmark_border
 import org.dtcm.work.database.data.ProductImages
 import org.dtcm.work.design.IndicatorDots
 import org.dtcm.work.design.MainHorizontalPager

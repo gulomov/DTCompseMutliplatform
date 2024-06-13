@@ -5,10 +5,6 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.ui.graphics.vector.ImageVector
-import org.diploma.navigationcomposables.Res
-import org.diploma.navigationcomposables.bottom_nav_favorite
-import org.diploma.navigationcomposables.bottom_nav_gallery
-import org.diploma.navigationcomposables.bottom_nav_home
 import org.dtcm.work.navigationroute.ScreenRoute
 import org.jetbrains.compose.resources.StringResource
 

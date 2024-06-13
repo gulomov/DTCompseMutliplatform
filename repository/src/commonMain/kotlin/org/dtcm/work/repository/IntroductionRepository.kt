@@ -3,12 +3,18 @@ package org.dtcm.work.repository
 import org.dtcmp.work.datastore.IntroductionSettings
 import org.koin.core.component.KoinComponent
 
-class IntroductionRepository(private val dataStore: IntroductionSettings) {
-    suspend fun saveIntroductionData(key: String, value: Boolean) {
+interface IntroductionRepository {
+    suspend fun saveIntroductionData(key: String, value: Boolean)
+    suspend fun wasIntroductionShown(key: String, defaultValue: Boolean = false): Boolean
+}
+
+class IntroductionRepositoryImpl(private val dataStore: IntroductionSettings) :
+    IntroductionRepository {
+    override suspend fun saveIntroductionData(key: String, value: Boolean) {
         dataStore.setIntroductionShown(key, value)
     }
 
-    suspend fun getIntroductionData(key: String, defaultValue: Boolean): Boolean {
+    override suspend fun wasIntroductionShown(key: String, defaultValue: Boolean): Boolean {
         return dataStore.wasIntroductionShown(key, defaultValue)
     }
 }

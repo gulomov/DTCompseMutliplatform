@@ -23,10 +23,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import org.diploma.work.common.Res
-import org.diploma.work.common.ic_bookmark
-import org.diploma.work.common.ic_bookmark_border
-import org.diploma.work.common.productsSalePercentage
+import org.dtcm.work.common.Res
+import org.dtcm.work.common.ic_bookmark
+import org.dtcm.work.common.ic_bookmark_border
+import org.dtcm.work.common.productsSalePercentage
 import org.dtcm.work.design.IndicatorDots
 import org.dtcm.work.design.MainHorizontalPager
 import org.dtcm.work.design.small100

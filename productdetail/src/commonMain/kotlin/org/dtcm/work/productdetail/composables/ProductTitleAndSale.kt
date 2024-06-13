@@ -12,8 +12,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import org.diploma.work.common.Res
-import org.diploma.work.common.productsSalePercentage
+import org.dtcm.work.common.Res
+import org.dtcm.work.common.productsSalePercentage
 import org.dtcm.work.design.fontSize16
 import org.dtcm.work.design.fontSize20
 import org.dtcm.work.design.normal100

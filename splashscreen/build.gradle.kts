@@ -20,29 +20,40 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "navigationcomposables"
+            baseName = "splashscreen"
             isStatic = true
         }
     }
 
     sourceSets {
+        androidMain.dependencies {
+            implementation(libs.koin.android)
+            implementation(libs.ktor.client.android)
+        }
         commonMain.dependencies {
-            implementation(projects.navigationroute)
+            implementation(projects.database)
+            implementation(projects.datastore)
+            implementation(projects.domain)
+            implementation(projects.design)
+            implementation(projects.common)
+            implementation(projects.repository)
             implementation(projects.home)
             implementation(projects.introduction)
-            implementation(projects.gallery)
-            implementation(projects.favorites)
-            implementation(projects.productdetail)
-            implementation(projects.splashscreen)
+            implementation(projects.navigationroute)
 
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material)
             implementation(compose.ui)
             implementation(compose.components.resources)
-            implementation(libs.androidx.navigation)
+            implementation(libs.koin.compose)
+            implementation(libs.koin.core)
+            implementation(libs.viewmode.compose)
+            implementation(libs.coil)
+            implementation(libs.coil.compose)
+            implementation(libs.coil.ktor)
             implementation(libs.compose.material3.multiplatform)
-            implementation(libs.cupertino)
+            implementation(libs.androidx.navigation)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -51,7 +62,7 @@ kotlin {
 }
 
 android {
-    namespace = "org.dtcm.work.navigationcomposables"
+    namespace = "org.dtcm.work.splashscreen"
     compileSdk = 34
     defaultConfig {
         minSdk = 24
@@ -65,8 +76,7 @@ android {
     }
     compose.resources {
         publicResClass = true
-        packageOfResClass = "org.dtcm.work.navigationcomposables"
+        packageOfResClass = "org.dtcm.work.splashscreen"
         generateResClass = always
     }
-
 }

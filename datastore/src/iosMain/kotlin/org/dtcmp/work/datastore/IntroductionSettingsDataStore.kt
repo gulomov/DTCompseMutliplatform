@@ -9,6 +9,6 @@ class IntroductionSettingsDataStore : IntroductionSettings {
     }
 
     override suspend fun setIntroductionShown(key: String, value: Boolean) {
-        userDefaults.boolForKey(key)
+        userDefaults.setBool(value,key)
     }
 }

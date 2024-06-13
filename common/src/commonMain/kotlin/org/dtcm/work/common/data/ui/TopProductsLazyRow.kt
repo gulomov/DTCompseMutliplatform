@@ -24,10 +24,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavController
 import coil3.compose.AsyncImage
-import org.diploma.work.common.Res
-import org.diploma.work.common.productsSalePercentage
-import org.diploma.work.common.topProductsTitle
+import org.dtcm.work.common.Res
 import org.dtcm.work.common.data.data.TopProductItem
+import org.dtcm.work.common.productsSalePercentage
+import org.dtcm.work.common.topProductsTitle
 import org.dtcm.work.design.normal100
 import org.dtcm.work.design.small100
 import org.dtcm.work.design.small50

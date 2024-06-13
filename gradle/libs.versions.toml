@@ -32,6 +32,7 @@ ktor = "2.3.11"
 cupertino = "0.1.0-alpha04"
 datetime = "0.6.0"
 data-store = "1.1.1"
+coreSplashscreen = "1.0.1"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }

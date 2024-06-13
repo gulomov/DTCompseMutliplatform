@@ -73,7 +73,7 @@ android {
     }
     compose.resources {
         publicResClass = true
-        packageOfResClass = "org.diploma.work.home"
+        packageOfResClass = "org.dtcm.work.home"
         generateResClass = always
     }
 }

@@ -7,5 +7,5 @@ import org.koin.dsl.module
 
 actual val datastoreModule = module {
     single { createDataStoreIos() }
-    single<IntroductionSettings> { provideIntroductionDataStore(get()) }
+    single<IntroductionSettings> { provideIntroductionDataStore(null) }
 }

@@ -19,13 +19,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
-import org.diploma.work.home.Res
-import org.diploma.work.home.homeScreenRecommendationsTitle
 import org.dtcm.work.common.data.data.RecommendationItem
 import org.dtcm.work.design.normal100
 import org.dtcm.work.design.recommendationImageHeightSize
 import org.dtcm.work.design.recommendationImageWidthSize
 import org.dtcm.work.design.small100
+import org.dtcm.work.home.Res
+import org.dtcm.work.home.homeScreenRecommendationsTitle
 import org.dtcm.work.navigationroute.ScreenRoute
 import org.jetbrains.compose.resources.stringResource
 
