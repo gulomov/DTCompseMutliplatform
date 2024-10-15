@@ -64,6 +64,13 @@ class HomeViewModel(
         navigationRoute.value = route
     }
 
+    fun onRecommendationsClicked(brand: String) {
+        val route = ScreenRoute.RECOMMENDATION_DETAILS.replace(
+            "{brandName}", brand
+        )
+        navigationRoute.value = route
+    }
+
     fun resetOnClick() {
         navigationRoute.value = null
     }
