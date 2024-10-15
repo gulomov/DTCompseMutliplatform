@@ -43,7 +43,7 @@ fun FavoritesScreen(
                         val route = PRODUCTION_DETAIL.replace("{productId}", it.id.toString())
                         navController.navigate(route)
                     },
-                    onSaveOrDeleteClick = {
+                    handleSaveClick = {
                         favoriteProduct.id?.let { id ->
                             viewModel.deleteFromFavoriteProducts(
                                 id

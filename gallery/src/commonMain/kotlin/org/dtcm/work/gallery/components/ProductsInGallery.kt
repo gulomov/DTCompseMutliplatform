@@ -51,7 +51,7 @@ fun ProductsInGallery(
                             )
                             navController.navigate(route)
                         },
-                        onSaveOrDeleteClick = {
+                        handleSaveClick = {
                             if (!it) {
                                 product.id?.let { id ->
                                     viewModel.deleteFromFavoriteProducts(id)

@@ -20,7 +20,7 @@ import org.dtcm.work.design.small150
 fun <T> GenericProductItem(
     item: T,
     onClick: (T) -> Unit,
-    onSaveOrDeleteClick: (Boolean) -> Unit,
+    handleSaveClick: (Boolean) -> Unit,
     productImagesList: List<String>,
     productPercentage: String,
     title: String,
@@ -43,7 +43,7 @@ fun <T> GenericProductItem(
                 isFavorite = isFavorite,
                 productPercentage = productPercentage,
                 onSaveClick = {
-                    onSaveOrDeleteClick(it)
+                    handleSaveClick(it)
                 }
             )
             Spacer(modifier = Modifier.height(small100))
