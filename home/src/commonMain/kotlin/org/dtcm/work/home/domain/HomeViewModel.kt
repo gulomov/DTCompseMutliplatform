@@ -3,11 +3,14 @@ package org.dtcm.work.home.domain
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import org.dtcm.work.common.data.data.NewsItem
 import org.dtcm.work.common.data.data.RecommendationItem
 import org.dtcm.work.common.data.data.TopProductItem
+import org.dtcm.work.common.data.navigation.ScreenRoute
 import org.dtcm.work.domain.FetchAllProductsFromFirebaseAndSaveUseCase
 import org.dtcm.work.domain.FetchNewsFromFirebaseAndSaveUseCase
 import org.dtcm.work.domain.FetchRecommendationsFromFirebaseAndSaveUseCase
@@ -25,57 +28,44 @@ class HomeViewModel(
     private val getHomeRecommendationsUseCase: GetHomeRecommendationsUseCase,
     private val getTopProductsUseCase: GetTopProductsUseCase,
 ) : ViewModel() {
-
-    private val _newsInfo = MutableStateFlow(listOf<NewsItem>())
-    val news = _newsInfo.asStateFlow()
-
-    private val _recommendationsList = MutableStateFlow(listOf<RecommendationItem>())
-    val recommendationsList = _recommendationsList.asStateFlow()
-
-    private val _topProductsList = MutableStateFlow(listOf<TopProductItem>())
-    val topProductsList = _topProductsList.asStateFlow()
+    private val _uiState = MutableStateFlow(HomeUiState())
+    val uiState: StateFlow<HomeUiState> = _uiState
+    private val navigationRoute = MutableStateFlow<String?>(null)
 
     init {
         fetchAndSaveNews()
         fetchAndSaveRecommendations()
         fetchAndSaveTopProducts()
         fetchAllProducts()
-    }
-
-    fun getNews() {
         viewModelScope.launch {
-            getHomeNewsInfoUseCase().collect { resource ->
-                if (resource.isNotEmpty()) {
-                    _newsInfo.value = resource
-                } else {
-                    println("News is empty")
-                }
+            combine(
+                getHomeNewsInfoUseCase(),
+                getHomeRecommendationsUseCase(),
+                getTopProductsUseCase(),
+                navigationRoute
+            ) { news, recommendations, products, route ->
+                HomeUiState(
+                    isLoading = false,
+                    navigationRoute = route,
+                    newsInfo = news,
+                    recommendationsList = recommendations,
+                    topProductsList = products
+                )
+            }.collect { newState ->
+                _uiState.value = newState
             }
         }
     }
 
-    fun getRecommendationsList() {
-        viewModelScope.launch {
-            getHomeRecommendationsUseCase().collect { resource ->
-                if (resource.isNotEmpty()) {
-                    _recommendationsList.value = resource
-                } else {
-                    println("Recommendations is empty")
-                }
-            }
-        }
+    fun onNewsClicked(newsId: Int) {
+        val route = ScreenRoute.NEWS_DETAILS.replace(
+            "{newsId}", newsId.toString()
+        )
+        navigationRoute.value = route
     }
 
-    fun getTopProductsList() {
-        viewModelScope.launch {
-            getTopProductsUseCase().collect { data ->
-                if (data.isNotEmpty()) {
-                    _topProductsList.value = data
-                } else {
-                    println("Top products is empty")
-                }
-            }
-        }
+    fun resetOnClick() {
+        navigationRoute.value = null
     }
 
     private fun fetchAndSaveNews() = viewModelScope.launch {
