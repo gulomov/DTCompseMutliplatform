@@ -1,5 +1,6 @@
 package org.dtcm.work.home.domain.news
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -17,6 +18,7 @@ import androidx.navigation.NavController
 import coil3.compose.AsyncImage
 import org.dtcm.work.common.data.createSavedStateHandle
 import org.dtcm.work.design.newsCarouselImageSize
+import org.dtcm.work.design.normal100
 import org.dtcm.work.design.normal150
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
@@ -31,7 +33,10 @@ fun NewsDetailScreen(
     val viewModel: NewsDetailViewModel = koinInject { parametersOf(savedStateHandle) }
     val details by viewModel.details.collectAsState()
 
-    Column(modifier = modifier) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(normal100)
+    ) {
         AsyncImage(
             model = details.image,
             contentDescription = null,
@@ -40,13 +45,11 @@ fun NewsDetailScreen(
                 .height(newsCarouselImageSize)
                 .align(Alignment.CenterHorizontally),
         )
-        Spacer(modifier = Modifier.height(normal150))
         Text(
             text = details.title.toString(),
             modifier = Modifier.padding(horizontal = normal150),
             fontWeight = FontWeight.Bold,
         )
-        Spacer(modifier = Modifier.height(normal150))
         Text(
             text = details.body.toString(),
             modifier = Modifier.padding(horizontal = normal150),
