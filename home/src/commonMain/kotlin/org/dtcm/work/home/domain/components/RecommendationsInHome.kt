@@ -4,7 +4,6 @@ import BrandImage
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -18,13 +17,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.navigation.NavController
 import org.dtcm.work.common.data.data.RecommendationItem
-import org.dtcm.work.common.data.navigation.ScreenRoute
 import org.dtcm.work.design.normal100
 import org.dtcm.work.design.recommendationImageHeightSize
 import org.dtcm.work.design.recommendationImageWidthSize
 import org.dtcm.work.design.small100
+import org.dtcm.work.design.small150
 import org.dtcm.work.home.Res
 import org.dtcm.work.home.homeScreenRecommendationsTitle
 import org.jetbrains.compose.resources.stringResource
@@ -33,7 +31,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 internal fun RecommendationsInHome(
     recommendations: List<RecommendationItem>,
-    navController: NavController,
+    onRecommendationClicked: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val pagerState = rememberPagerState(pageCount = { recommendations.size })
@@ -43,27 +41,22 @@ internal fun RecommendationsInHome(
     ) {
         Text(
             text = stringResource(Res.string.homeScreenRecommendationsTitle),
-            modifier = Modifier.padding(start = normal100, top = normal100),
+            modifier = Modifier.padding(start = small150, top = small150),
             fontWeight = FontWeight.Bold,
         )
         HorizontalPager(
             state = pagerState,
-            contentPadding = PaddingValues(horizontal = normal100, vertical = small100),
+            contentPadding = PaddingValues(small150),
             pageSpacing = small100,
             pageSize = PageSize.Fixed(recommendationImageWidthSize),
         ) { page ->
             // FIXME: Change size
             Card(
                 modifier = Modifier
-                    .padding(normal100)
                     .width(recommendationImageWidthSize),
                 shape = RoundedCornerShape(normal100),
                 onClick = {
-                    println("brand name: ${recommendations[page].brand}")
-                    val route = ScreenRoute.RECOMMENDATION_DETAILS.replace(
-                        "{brandName}", recommendations[page].brand.toString()
-                    )
-                    navController.navigate(route)
+                    onRecommendationClicked(recommendations[page].brand.toString())
                 },
             ) {
                 BrandImage(

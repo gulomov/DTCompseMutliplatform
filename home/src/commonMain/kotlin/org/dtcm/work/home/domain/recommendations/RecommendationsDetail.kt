@@ -1,12 +1,10 @@
 package org.dtcm.work.home.domain.recommendations
 
 import GenericProductItem
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -26,45 +24,36 @@ fun RecommendationsDetail(
 ) {
     val savedStateHandle = remember { createSavedStateHandle(mapOf("brandName" to brandName)) }
     val viewModel: RecommendationsDetailViewModel = koinInject { parametersOf(savedStateHandle) }
-    val products by viewModel.products.collectAsState()
-    val favoriteIds by viewModel.favoriteIds.collectAsState()
+    val uiState by viewModel.uiState.collectAsState()
 
-    LaunchedEffect(Unit) {
-        viewModel.getFavoriteProductsIds()
+    uiState.navigationRoute?.let { route ->
+        navController.navigate(route)
+        viewModel.resetNavigation()
     }
 
-    Box(modifier = modifier) {
-        LazyVerticalGrid(
-            modifier = Modifier,
-            columns = GridCells.Fixed(GRID_CELLS),
-            content = {
-                items(products) { product ->
-                    GenericProductItem(
-                        item = product,
-                        onClick = {
-                            val route = ScreenRoute.PRODUCTION_DETAIL.replace(
-                                "{productId}",
-                                it.id.toString()
-                            )
-                            navController.navigate(route)
-                        },
-                        onSaveOrDeleteClick = {
-                            if (!it) {
-                                product.id?.let { id ->
-                                    viewModel.deleteFromFavoriteProducts(id)
-                                }
-                            } else {
-                                viewModel.saveToFavoriteProduct(product)
-                            }
-                        },
-                        productImagesList = product.images?.map { it.imageUrl } ?: emptyList(),
-                        productPercentage = product.salePercentage.toString(),
-                        title = product.title.toString(),
-                        originalPrice = product.originalPrice.toString(),
-                        priceOnSale = product.priceOnSale.toString(),
-                        isFavorite = favoriteIds.contains(product.id)
-                    )
-                }
-            })
-    }
+    LazyVerticalGrid(
+        modifier = modifier,
+        columns = GridCells.Fixed(GRID_CELLS),
+        content = {
+            items(uiState.products) { product ->
+                GenericProductItem(
+                    item = product,
+                    onClick = {
+                        viewModel.onProductClicked(product.id.toString())
+                    },
+                    handleSaveClick = {
+                        viewModel.handleSaveClick(
+                            product = product,
+                            isProductSaved = it
+                        )
+                    },
+                    productImagesList = product.images?.map { it.imageUrl } ?: emptyList(),
+                    productPercentage = product.salePercentage.toString(),
+                    title = product.title.toString(),
+                    originalPrice = product.originalPrice.toString(),
+                    priceOnSale = product.priceOnSale.toString(),
+                    isFavorite = uiState.favoriteIds.contains(product.id)
+                )
+            }
+        })
 }
