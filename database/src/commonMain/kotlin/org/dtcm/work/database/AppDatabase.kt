@@ -1,8 +1,10 @@
 package org.dtcm.work.database
 
 import Converters
+import androidx.room.ConstructedBy
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import androidx.room.RoomDatabaseConstructor
 import androidx.room.TypeConverters
 import org.dtcm.work.database.dao.HomeScreenDao
 import org.dtcm.work.database.dao.ProductsDao
@@ -29,17 +31,15 @@ import org.dtcm.work.database.entities.AllProductsListEntity
     version = 1,
 )
 @TypeConverters(Converters::class)
-abstract class AppDatabase : RoomDatabase(), DB {
+@ConstructedBy(AppDatabaseConstructor::class)
+abstract class AppDatabase : RoomDatabase() {
     abstract fun productDao(): ProductsDao
     abstract fun homeScreenDao(): HomeScreenDao
-    override fun clearAllTables() {
-        super.clearAllTables()
-    }
+
 }
 
-
-// FIXME: Added a hack to resolve below issue:
-// Class 'AppDatabase_Impl' is not abstract and does not implement abstract base class member 'clearAllTables'.
-interface DB {
-    fun clearAllTables() {}
+@Suppress("NO_ACTUAL_FOR_EXPECT")
+expect object AppDatabaseConstructor : RoomDatabaseConstructor<AppDatabase> {
+    override fun initialize(): AppDatabase
 }
+
