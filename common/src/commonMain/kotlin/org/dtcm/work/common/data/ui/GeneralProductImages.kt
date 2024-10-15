@@ -52,7 +52,7 @@ fun GenericProductImages(
 
     Box {
         MainHorizontalPager(
-            pagerState = pagerState,
+            itemsCount = imageUrls.size,
             itemContent = { index ->
                 ProductImage(imageUrl = imageUrls[index])
             }

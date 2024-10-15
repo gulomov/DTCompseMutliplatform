@@ -50,7 +50,7 @@ internal fun ProductDetailsImages(
     }
     Box(modifier = Modifier.fillMaxWidth()) {
         MainHorizontalPager(
-            pagerState = pagerState,
+            itemsCount = productImages.size,
             itemContent = {
                 ProductHorizontalPager(productImages[it].imageUrl)
             },
