@@ -5,9 +5,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import org.dtcm.work.common.data.data.AllProductsItem
+import org.dtcm.work.common.data.navigation.ScreenRoute
 import org.dtcm.work.domain.DeleteFromFavoriteProductsUseCase
 import org.dtcm.work.domain.GetFavoriteProductsIdsUseCase
 import org.dtcm.work.domain.GetProductsByBrandNameUseCase
@@ -22,31 +24,48 @@ class RecommendationsDetailViewModel(
     private val saveToFavoriteProductUseCase: SaveToFavoriteProductUseCase,
     private val getFavoriteProductsIdsUseCase: GetFavoriteProductsIdsUseCase,
 ) : ViewModel() {
-    private val _products = MutableStateFlow(listOf(AllProductsItem()))
-    val products: StateFlow<List<AllProductsItem>> = _products
+    private val _uiState = MutableStateFlow(RecommendationsUiState())
+    val uiState: StateFlow<RecommendationsUiState> = _uiState
 
-    private val _favoriteIds = MutableStateFlow(listOf<Int>())
-    val favoriteIds = _favoriteIds.asStateFlow()
+    private val navigationRoute = MutableStateFlow<String?>(null)
 
     init {
         viewModelScope.launch {
-            _products.value =
-                getProductsByBrandNameUseCase(checkNotNull(savedStateHandle[BRAND_NAME]))
-            getFavoriteProductsIds()
+            combine(
+                flowOf(getProductsByBrandNameUseCase(checkNotNull(savedStateHandle[BRAND_NAME]))),
+                flowOf(getFavoriteProductsIdsUseCase()),
+                navigationRoute,
+            ) { productsName, favoriteProductsIds, navigationRoute ->
+                RecommendationsUiState(
+                    products = productsName,
+                    favoriteIds = favoriteProductsIds,
+                    navigationRoute = navigationRoute
+                )
+            }.collect {
+                _uiState.value = it
+            }
         }
     }
 
-    fun deleteFromFavoriteProducts(productId: Int) = viewModelScope.launch {
-        deleteFromFavoriteProductsUseCase(productId)
-    }
-
-    fun saveToFavoriteProduct(product: AllProductsItem) = viewModelScope.launch {
-        saveToFavoriteProductUseCase(product.asFavoriteProduct())
-    }
-
-    fun getFavoriteProductsIds() {
-        viewModelScope.launch {
-            _favoriteIds.value = getFavoriteProductsIdsUseCase()
+    fun handleSaveClick(product: AllProductsItem, isProductSaved: Boolean) = viewModelScope.launch {
+        if (isProductSaved) {
+            saveToFavoriteProductUseCase(product.asFavoriteProduct())
+        } else {
+            product.id?.let {
+                deleteFromFavoriteProductsUseCase(it)
+            }
         }
+    }
+
+    fun onProductClicked(productId: String) {
+        val route = ScreenRoute.PRODUCTION_DETAIL.replace(
+            "{productId}",
+            productId
+        )
+        navigationRoute.value = route
+    }
+
+    fun resetNavigation() {
+        navigationRoute.value = null
     }
 }
