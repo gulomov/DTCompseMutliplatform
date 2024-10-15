@@ -5,6 +5,7 @@ import database.entities.HomeRecommendationsEntity
 import dev.gitlive.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import org.dtcm.work.common.data.data.NewsInfo
@@ -26,9 +27,10 @@ class HomeRepository(
 ) {
 
     suspend fun fetchAndSaveNewsInfoFromFirebase() {
-        fetchFromDatabase<NewsInfo>("home/news", firebaseDatabase).collect { newsInfo ->
-            newsInfo?.newsList?.let { newsList ->
-                withContext(Dispatchers.IO) {
+        fetchFromDatabase<NewsInfo>("home/news", firebaseDatabase)
+            .flowOn(Dispatchers.IO)
+            .collect { newsInfo ->
+                newsInfo?.newsList?.let { newsList ->
                     newsList.forEach {
                         roomDb.homeScreenDao().saveNewsInfo(
                             NewsInfoEntity(
@@ -41,15 +43,14 @@ class HomeRepository(
                     }
                 }
             }
-        }
     }
 
     suspend fun fetchAndSaveHomeRecommendationsFromFirebase() {
         fetchFromDatabase<RecommendationsList>(
             "home/recommendations",
-            firebaseDatabase,
-        ).collect { data ->
-            withContext(Dispatchers.IO) {
+            firebaseDatabase
+        ).flowOn(Dispatchers.IO)
+            .collect { data ->
                 data?.recommendationsList?.map {
                     roomDb.homeScreenDao().saveHomeRecommendations(
                         HomeRecommendationsEntity(
@@ -60,15 +61,14 @@ class HomeRepository(
                     )
                 }
             }
-        }
     }
 
     suspend fun fetchAndSaveTopProductsFromFirebase() {
         fetchFromDatabase<TopProductsList>(
             "home/topProducts",
             firebaseDatabase,
-        ).collect { data ->
-            withContext(Dispatchers.IO) {
+        ).flowOn(Dispatchers.IO)
+            .collect { data ->
                 data?.topProductsList?.map {
                     roomDb.homeScreenDao().saveTopProductsList(
                         TopProductsListEntity(
@@ -87,7 +87,6 @@ class HomeRepository(
                     )
                 }
             }
-        }
     }
 
     fun getNewsInfo() = roomDb.homeScreenDao().getNewsInfoFlow().map { newsEntityList ->

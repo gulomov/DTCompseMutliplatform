@@ -5,6 +5,7 @@ import dev.gitlive.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import org.dtcm.work.common.data.data.AllProductsItem
@@ -26,25 +27,23 @@ class AllProductsRepository(
         fetchFromDatabase<AllProductsList>(
             "home/allProducts",
             firebaseDatabase
-        ).collect { data ->
-            withContext(Dispatchers.IO) {
-                data?.allProductsList?.map {
-                    roomDb.productDao().saveToAllProductsEntity(
-                        AllProductsListEntity(
-                            address = it.address.orEmpty(),
-                            id = it.id ?: 0,
-                            imageUrl = Converters().fromImagesList(it.images.orEmpty()),
-                            title = it.title.orEmpty(),
-                            salePercentage = it.salePercentage ?: 0,
-                            saleStartsDate = it.saleStartsDate.orEmpty(),
-                            saleEndsDate = it.saleEndsDate.orEmpty(),
-                            originalPrice = it.originalPrice ?: 0,
-                            priceOnSale = it.priceOnSale ?: 0,
-                            sizes = Converters().fromSizesList(it.sizes.orEmpty()),
-                            brand = it.brand.toString()
-                        )
+        ).flowOn(Dispatchers.IO).collect { data ->
+            data?.allProductsList?.map {
+                roomDb.productDao().saveToAllProductsEntity(
+                    AllProductsListEntity(
+                        address = it.address.orEmpty(),
+                        id = it.id ?: 0,
+                        imageUrl = Converters().fromImagesList(it.images.orEmpty()),
+                        title = it.title.orEmpty(),
+                        salePercentage = it.salePercentage ?: 0,
+                        saleStartsDate = it.saleStartsDate.orEmpty(),
+                        saleEndsDate = it.saleEndsDate.orEmpty(),
+                        originalPrice = it.originalPrice ?: 0,
+                        priceOnSale = it.priceOnSale ?: 0,
+                        sizes = Converters().fromSizesList(it.sizes.orEmpty()),
+                        brand = it.brand.toString()
                     )
-                }
+                )
             }
         }
     }
@@ -86,17 +85,15 @@ class AllProductsRepository(
         fetchFromDatabase<BrandsList>(
             "home/brands",
             firebaseDatabase
-        ).collect { data ->
-            withContext(Dispatchers.IO) {
-                data?.brandsList?.map {
-                    roomDb.productDao().saveToBrandsEntity(
-                        BrandsListEntity(
-                            brandId = it.brandId ?: 0,
-                            brand = it.brand.toString(),
-                            imageUrl = it.imageUrl.toString()
-                        )
+        ).flowOn(Dispatchers.IO).collect { data ->
+            data?.brandsList?.map {
+                roomDb.productDao().saveToBrandsEntity(
+                    BrandsListEntity(
+                        brandId = it.brandId ?: 0,
+                        brand = it.brand.toString(),
+                        imageUrl = it.imageUrl.toString()
                     )
-                }
+                )
             }
         }
     }
