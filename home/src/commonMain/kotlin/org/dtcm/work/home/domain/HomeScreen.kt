@@ -21,7 +21,7 @@ fun HomeScreen(
 
     uiState.value.navigationRoute?.let { route ->
         navController.navigate(route)
-        viewModel.resetOnClick()
+        viewModel.resetNavigation()
     }
 
     LazyColumn(

@@ -4,12 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
-import org.dtcm.work.common.data.data.NewsItem
-import org.dtcm.work.common.data.data.RecommendationItem
-import org.dtcm.work.common.data.data.TopProductItem
 import org.dtcm.work.common.data.navigation.ScreenRoute
 import org.dtcm.work.domain.FetchAllProductsFromFirebaseAndSaveUseCase
 import org.dtcm.work.domain.FetchNewsFromFirebaseAndSaveUseCase
@@ -71,7 +67,7 @@ class HomeViewModel(
         navigationRoute.value = route
     }
 
-    fun resetOnClick() {
+    fun resetNavigation() {
         navigationRoute.value = null
     }
 
