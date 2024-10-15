@@ -6,7 +6,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -41,6 +43,7 @@ fun GenericProductImages(
     isFavorite: Boolean,
     imageUrls: List<String>,
     onSaveClick: (Boolean) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val pagerState = rememberPagerState(pageCount = { imageUrls.size })
     val isDragged by pagerState.interactionSource.collectIsDraggedAsState()
@@ -50,13 +53,13 @@ fun GenericProductImages(
         isProductSaved = isFavorite
     }
 
-    Box {
-        MainHorizontalPager(
-            itemsCount = imageUrls.size,
-            itemContent = { index ->
-                ProductImage(imageUrl = imageUrls[index])
-            }
-        )
+    Box(modifier = modifier) {
+        HorizontalPager(
+            state = pagerState,
+            modifier = Modifier.fillMaxWidth()
+        ) { page ->
+            ProductImage(imageUrl = imageUrls[page])
+        }
         Text(
             text = stringResource(
                 Res.string.productsSalePercentage,
