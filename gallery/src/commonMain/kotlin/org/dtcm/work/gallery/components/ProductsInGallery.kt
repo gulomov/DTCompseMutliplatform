@@ -24,11 +24,12 @@ import org.dtcm.work.gallery.GalleryScreenViewModel
 fun ProductsInGallery(
     brands: List<BrandsItem>,
     products: List<AllProductsItem>,
-    navController: NavController,
-    viewModel: GalleryScreenViewModel,
-    favoriteIds: List<Int>
+    favoriteIds: List<Int>,
+    onProductClicked: (Int) -> Unit,
+    handleSaveClick: (Boolean, AllProductsItem) -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    Box {
+    Box(modifier = modifier) {
         if (brands.isEmpty()) {
             EmptyStateImage(
                 modifier = Modifier
@@ -44,22 +45,8 @@ fun ProductsInGallery(
                 items(products) { product ->
                     GenericProductItem(
                         item = product,
-                        onClick = {
-                            val route = ScreenRoute.PRODUCTION_DETAIL.replace(
-                                "{productId}",
-                                it.id.toString()
-                            )
-                            navController.navigate(route)
-                        },
-                        handleSaveClick = {
-                            if (!it) {
-                                product.id?.let { id ->
-                                    viewModel.deleteFromFavoriteProducts(id)
-                                }
-                            } else {
-                                viewModel.saveToFavoriteProduct(product)
-                            }
-                        },
+                        onClick = { product.id?.let { onProductClicked(it) } },
+                        handleSaveClick = { handleSaveClick(it, product) },
                         productImagesList = product.images?.map { it.imageUrl } ?: emptyList(),
                         productPercentage = product.salePercentage.toString(),
                         title = product.title.toString(),

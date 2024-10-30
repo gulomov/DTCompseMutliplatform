@@ -5,9 +5,12 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import org.dtcm.work.common.data.data.AllProductsItem
 import org.dtcm.work.common.data.data.BrandsItem
+import org.dtcm.work.common.data.navigation.ScreenRoute
 import org.dtcm.work.domain.DeleteFromFavoriteProductsUseCase
 import org.dtcm.work.domain.FetchAllProductsFromFirebaseAndSaveUseCase
 import org.dtcm.work.domain.FetchBrandsFromFirebaseAndSaveUseCase
@@ -27,39 +30,31 @@ class GalleryScreenViewModel(
     private val getProductsByBrandNameUseCase: GetProductsByBrandNameUseCase,
     private val saveToFavoriteProductUseCase: SaveToFavoriteProductUseCase
 ) : ViewModel() {
-    private val _brandsList = MutableStateFlow(listOf(BrandsItem()))
-    val brandsList = _brandsList.asStateFlow()
-
-    private val _products = MutableStateFlow(listOf(AllProductsItem()))
-    val products: StateFlow<List<AllProductsItem>> = _products
-
-    private val _favoriteIds = MutableStateFlow(listOf<Int>())
-    val favoriteIds = _favoriteIds.asStateFlow()
+    private val _uiState = MutableStateFlow(GalleryUiState())
+    val uiState: StateFlow<GalleryUiState> = _uiState
+    private val navigationRoute = MutableStateFlow<String?>(null)
 
     init {
         fetchAllProducts()
         fetchBrands()
-
-    }
-
-    fun getBrands() = viewModelScope.launch {
-        getBrandsUseCase().collect {
-            if (it.isNotEmpty()) {
-                _brandsList.value = it
-            } else {
-                println("Brands is empty")
+        viewModelScope.launch {
+            combine(
+                getBrandsUseCase(),
+                getAllProductsUseCase(),
+                flowOf(getFavoriteProductsIdsUseCase()),
+                navigationRoute
+            ) { brandsItems, allProductsItems, favoriteIds, navigationRoute ->
+                GalleryUiState(
+                    brandsList = brandsItems,
+                    productsList = allProductsItems,
+                    favoriteIds = favoriteIds,
+                    navigationRoute = navigationRoute
+                )
+            }.collect {
+                _uiState.value = it
             }
         }
-    }
 
-    fun getAllProducts() = viewModelScope.launch {
-        getAllProductsUseCase().collect {
-            if (it.isNotEmpty()) {
-                _products.value = it
-            } else {
-                println("Products list is empty")
-            }
-        }
     }
 
     fun loadProductsByBrands(brandName: String) = viewModelScope.launch {
@@ -71,6 +66,16 @@ class GalleryScreenViewModel(
             }
         }
         getFavoriteProductsIds()
+    }
+
+    fun getAllProducts() = viewModelScope.launch {
+        getAllProductsUseCase().collect {
+            if (it.isNotEmpty()) {
+                _products.value = it
+            } else {
+                println("Products list is empty")
+            }
+        }
     }
 
     fun getFavoriteProductsIds() {
@@ -87,12 +92,21 @@ class GalleryScreenViewModel(
         fetchBrandsFromFirebaseAndSaveUseCase()
     }
 
-    fun deleteFromFavoriteProducts(productId: Int) = viewModelScope.launch {
-        deleteFromFavoriteProductsUseCase(productId)
+    fun onProductClicked(id: Int) {
+        val route = ScreenRoute.PRODUCTION_DETAIL.replace(
+            "{productId}",
+            id.toString()
+        )
+        navigationRoute.value = route
     }
 
-    fun saveToFavoriteProduct(product: AllProductsItem) = viewModelScope.launch {
-        saveToFavoriteProductUseCase(product.asFavoriteProduct())
+    fun handleSaveClick(isSaved: Boolean, product: AllProductsItem) = viewModelScope.launch {
+        if (!isSaved) {
+            product.id?.let { deleteFromFavoriteProductsUseCase(it) }
+        } else {
+            saveToFavoriteProductUseCase(product.asFavoriteProduct())
+        }
+
     }
 
 }

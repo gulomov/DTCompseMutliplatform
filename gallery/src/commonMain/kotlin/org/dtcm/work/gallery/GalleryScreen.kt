@@ -21,24 +21,32 @@ fun GalleryScreen(
     modifier: Modifier = Modifier,
     viewModel: GalleryScreenViewModel = koinInject()
 ) {
-    val brands by viewModel.brandsList.collectAsState()
-    val products by viewModel.products.collectAsState()
-    val favoriteIds by viewModel.favoriteIds.collectAsState()
+
+    val uiState = viewModel.uiState.collectAsState()
+
+    uiState.value.navigationRoute?.let {
+        navController.navigate(it)
+    }
 
     LaunchedEffect(Unit) {
-        viewModel.getBrands()
-        viewModel.getAllProducts()
         viewModel.getFavoriteProductsIds()
     }
+
     Column(
         horizontalAlignment = Alignment.Start,
         modifier = modifier,
     ) {
-        BrandsInGallery(brands, brandClick = {
+        BrandsInGallery(uiState.value.brandsList, brandClick = {
             viewModel.loadProductsByBrands(brandName = it)
         })
         Spacer(modifier = Modifier.height(normal100))
-        ProductsInGallery(brands, products, navController, viewModel, favoriteIds)
+        ProductsInGallery(
+            brands = uiState.value.brandsList,
+            products = uiState.value.productsList,
+            favoriteIds = uiState.value.favoriteIds,
+            onProductClicked = viewModel::onProductClicked,
+            handleSaveClick = viewModel::handleSaveClick
+        )
     }
 }
 
