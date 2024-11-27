@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import org.dtcm.work.common.data.data.BrandsItem
 import org.dtcm.work.design.BrandsInGalleryImageHeightSize
 import org.dtcm.work.design.BrandsInGalleryImageWidthSize
+import org.dtcm.work.design.normal100
 import org.dtcm.work.design.small100
 
 
@@ -23,7 +24,7 @@ import org.dtcm.work.design.small100
 @Composable
 fun BrandsInGallery(
     brandsList: List<BrandsItem>,
-    brandClick: (String) -> Unit,
+    onBrandClicked: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val pagerState = rememberPagerState(pageCount = { brandsList.size })
@@ -31,16 +32,15 @@ fun BrandsInGallery(
     HorizontalPager(
         modifier = modifier,
         state = pagerState,
-        contentPadding = PaddingValues(small100),
+        contentPadding = PaddingValues(horizontal = normal100, vertical = small100),
         pageSpacing = small100,
         pageSize = PageSize.Fixed(BrandsInGalleryImageWidthSize),
     ) { page ->
         Card(
             modifier = Modifier
-                .padding(small100)
                 .width(BrandsInGalleryImageWidthSize),
             shape = RoundedCornerShape(small100),
-            onClick = { brandClick.invoke(brandsList[page].brand.toString()) }
+            onClick = { onBrandClicked(brandsList[page].brand.toString()) }
         ) {
             BrandImage(
                 imageUrl = brandsList[page].imageUrl.toString(),
