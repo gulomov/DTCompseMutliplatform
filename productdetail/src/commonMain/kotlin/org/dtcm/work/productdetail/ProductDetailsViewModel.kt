@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import org.dtcm.work.common.data.data.ProductDetailsDataResponse
-import org.dtcm.work.common.data.data.TopProductItem
 import org.dtcm.work.domain.DeleteFromFavoriteProductsUseCase
 import org.dtcm.work.domain.GetProductDetailsUseCase
 import org.dtcm.work.domain.GetTopProductsUseCase
