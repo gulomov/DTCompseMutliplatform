@@ -1,7 +1,11 @@
 package org.dtcm.work.gallery.components
 
 import GenericProductItem
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.MutableTransitionState
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -10,14 +14,12 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
 import org.dtcm.work.common.data.data.AllProductsItem
 import org.dtcm.work.common.data.data.BrandsItem
-import org.dtcm.work.common.data.navigation.ScreenRoute
 import org.dtcm.work.common.data.ui.EmptyStateImage
 import org.dtcm.work.design.GRID_CELLS
 import org.dtcm.work.design.normal100
-import org.dtcm.work.gallery.GalleryScreenViewModel
+import org.dtcm.work.design.small100
 
 
 @Composable
@@ -41,6 +43,9 @@ fun ProductsInGallery(
         LazyVerticalGrid(
             modifier = Modifier,
             columns = GridCells.Fixed(GRID_CELLS),
+            contentPadding = PaddingValues(horizontal = normal100, vertical = small100),
+            verticalArrangement = Arrangement.spacedBy(small100),
+            horizontalArrangement = Arrangement.spacedBy(small100),
             content = {
                 items(products) { product ->
                     GenericProductItem(
