@@ -9,9 +9,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
@@ -38,99 +36,67 @@ fun ProductDetails(
     modifier: Modifier = Modifier,
 ) {
     val context = getPlatformContext()
-
     val savedStateHandle = remember { createSavedStateHandle(mapOf("productId" to productId)) }
     val viewModel: ProductDetailsViewModel = koinInject { parametersOf(savedStateHandle) }
-    val productDetails by viewModel.productDetails.collectAsState()
-    val topProducts by viewModel.topProductsList.collectAsState()
-    val isProductSavedIntoFavorites by viewModel.isProductInFavorites.collectAsState()
-    val startBookingLogic by viewModel.startBookingLogic.collectAsState()
-    val isProductBooked by viewModel.isProductBooked.collectAsState()
+    val uiState = viewModel.uiState.collectAsState()
 
-    LaunchedEffect(Unit) {
-        viewModel.getTopProductsList()
+    if (uiState.value.startBookingLogic) {
+        BookingScreen(
+            onCloseBooking = viewModel::checkIfProductBooked,
+            productId = productId.toInt(),
+            showBottomSheet = uiState.value.isProductBooked,
+            showDatePicker = !uiState.value.isProductBooked,
+        )
     }
 
-
-    if (startBookingLogic) {
-        if (isProductBooked)
-            BookingScreen(
-                onCloseBooking = { viewModel.checkIfProductBooked() },
-                productId = productId.toInt(),
-                showBottomSheet = true,
-                showDatePicker = false,
-            ) else {
-            BookingScreen(
-                onCloseBooking = { viewModel.checkIfProductBooked() },
-                productId = productId.toInt(),
-                showBottomSheet = false,
-                showDatePicker = true,
-            )
-        }
-    }
-
-    productDetails.images?.let { data ->
-        Column(
-            modifier = modifier
-                .fillMaxWidth()
-                .verticalScroll(rememberScrollState()),
-        ) {
-            ProductDetailsImages(
-                productImages = data,
-                isProductSavedIntoFavorites = isProductSavedIntoFavorites,
-                saveProductIntoFavoritesClicked = {
-                    if (it) {
-                        viewModel.saveProductToFavorites(productDetails)
-                    } else {
-                        productDetails.id?.let { productId ->
-                            viewModel.deleteFromFavoriteProducts(
-                                productId
-                            )
-                        }
-                    }
-                })
-            ProductTitleAndSale(
-                productDetails.title.orEmpty(),
-                productDetails.salePercentage ?: 0,
-            )
-            PriceAndBooking(
-                isProductBooked = isProductBooked,
-                productDetails = productDetails,
-                bookingClicked = {
-                    viewModel.startBookingLogic(shouldShowBookingLogic = true)
-                })
-            Spacer(modifier = Modifier.height(normal150))
-            ProductSize(productDetails.sizes.orEmpty())
-            Text(
-                text = stringResource(
-                    Res.string.sales_period,
-                    productDetails.saleStartsDate.orEmpty(),
-                    productDetails.saleEndsDate.orEmpty(),
-                ),
-                modifier =
-                Modifier
-                    .padding(horizontal = normal100, vertical = normal150),
-            )
-            Text(
-                text = stringResource(
-                    Res.string.sale_on_address,
-                    productDetails.address.orEmpty(),
-                ),
-                modifier = Modifier.padding(horizontal = normal100),
-            )
-            MainButton(
-                modifier = Modifier
-                    .padding(normal100)
-                    .fillMaxWidth(),
-                onClick = { openInMaps(context, productDetails.address.orEmpty()) },
-                content = {
-                    Text(text = stringResource(Res.string.show_in_the_map))
-                },
-            )
-            TopProductsLazyRow(
-                productList = topProducts,
-                navController = navController,
-            )
-        }
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .verticalScroll(rememberScrollState()),
+    ) {
+        ProductDetailsImages(
+            productImages = uiState.value.productDetails.images,
+            isProductSavedIntoFavorites = uiState.value.isProductInFavorites,
+            saveProductIntoFavoritesClicked = { viewModel.handleSaveProductToFavorites() }
+        )
+        ProductTitleAndSale(
+            uiState.value.productDetails.title,
+            uiState.value.productDetails.salePercentage,
+        )
+        PriceAndBooking(
+            isProductBooked = uiState.value.isProductBooked,
+            productDetails = uiState.value.productDetails,
+            bookingClicked = viewModel::startBookingLogic
+        )
+        Spacer(modifier = Modifier.height(normal150))
+        ProductSize(uiState.value.productDetails.sizes)
+        Text(
+            text = stringResource(
+                Res.string.sales_period,
+                uiState.value.productDetails.saleStartsDate,
+                uiState.value.productDetails.saleEndsDate,
+            ),
+            modifier = Modifier.padding(horizontal = normal100, vertical = normal150),
+        )
+        Text(
+            text = stringResource(
+                Res.string.sale_on_address,
+                uiState.value.productDetails.address,
+            ),
+            modifier = Modifier.padding(horizontal = normal100),
+        )
+        MainButton(
+            modifier = Modifier
+                .padding(normal100)
+                .fillMaxWidth(),
+            onClick = { openInMaps(context, uiState.value.productDetails.address) },
+            content = {
+                Text(text = stringResource(Res.string.show_in_the_map))
+            },
+        )
+        TopProductsLazyRow(
+            productList = uiState.value.topProducts,
+            navController = navController,
+        )
     }
 }
