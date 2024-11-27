@@ -30,7 +30,6 @@ import org.dtcm.work.common.ic_bookmark
 import org.dtcm.work.common.ic_bookmark_border
 import org.dtcm.work.common.productsSalePercentage
 import org.dtcm.work.design.IndicatorDots
-import org.dtcm.work.design.MainHorizontalPager
 import org.dtcm.work.design.small100
 import org.dtcm.work.design.small50
 import org.jetbrains.compose.resources.painterResource
