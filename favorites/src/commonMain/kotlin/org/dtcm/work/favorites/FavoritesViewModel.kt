@@ -6,7 +6,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
-import org.dtcm.work.common.data.data.FavoriteProduct
 import org.dtcm.work.common.data.navigation.ScreenRoute
 import org.dtcm.work.domain.DeleteFromFavoriteProductsUseCase
 import org.dtcm.work.domain.GetFavoriteProductsUseCase
