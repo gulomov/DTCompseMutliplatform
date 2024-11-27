@@ -12,9 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import org.dtcm.work.common.data.ui.GenericProductImages
 import org.dtcm.work.common.data.ui.Prices
-import org.dtcm.work.design.normal100
 import org.dtcm.work.design.small100
-import org.dtcm.work.design.small150
 
 @Composable
 fun <T> GenericProductItem(
