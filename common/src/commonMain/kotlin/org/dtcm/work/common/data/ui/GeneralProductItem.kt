@@ -31,7 +31,7 @@ fun <T> GenericProductItem(
 ) {
     Card(
         onClick = { onClick(item) },
-        modifier = modifier.padding(horizontal = normal100, vertical = small150),
+        modifier = modifier,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceTint),
     ) {
         Column(
