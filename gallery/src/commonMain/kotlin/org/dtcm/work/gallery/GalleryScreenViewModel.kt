@@ -17,6 +17,8 @@ import org.dtcm.work.domain.GetFavoriteProductsIdsUseCase
 import org.dtcm.work.domain.GetProductsByBrandNameUseCase
 import org.dtcm.work.domain.SaveToFavoriteProductUseCase
 
+private const val PRODUCT_ID = "{productId}"
+
 class GalleryScreenViewModel(
     private val fetchAllProductsFromFirebaseAndSaveUseCase: FetchAllProductsFromFirebaseAndSaveUseCase,
     private val fetchBrandsFromFirebaseAndSaveUseCase: FetchBrandsFromFirebaseAndSaveUseCase,
@@ -96,7 +98,7 @@ class GalleryScreenViewModel(
 
     fun onProductClicked(id: Int) {
         val route = ScreenRoute.PRODUCTION_DETAIL.replace(
-            "{productId}",
+            PRODUCT_ID,
             id.toString()
         )
         navigationRoute.value = route
