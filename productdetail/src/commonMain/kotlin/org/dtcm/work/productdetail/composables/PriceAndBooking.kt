@@ -8,10 +8,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import org.dtcm.work.common.data.data.ProductDetailsData
 import org.dtcm.work.common.data.ui.Prices
 import org.dtcm.work.design.MainButton
 import org.dtcm.work.design.normal100
+import org.dtcm.work.productdetail.ProductDetailsData
 import org.dtcm.work.productdetail.Res
 import org.dtcm.work.productdetail.product_is_booked
 import org.dtcm.work.productdetail.want_book
@@ -23,8 +23,6 @@ internal fun PriceAndBooking(
     productDetails: ProductDetailsData,
     bookingClicked: () -> Unit
 ) {
-    println("isProductBooked: $isProductBooked")
-
     Row {
         Prices(
             originalPrice = productDetails.originalPrice.toString(),
