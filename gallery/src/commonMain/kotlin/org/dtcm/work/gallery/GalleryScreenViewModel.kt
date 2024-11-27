@@ -32,16 +32,21 @@ class GalleryScreenViewModel(
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(GalleryUiState())
     val uiState: StateFlow<GalleryUiState> = _uiState
+
     private val navigationRoute = MutableStateFlow<String?>(null)
+    private val products = MutableStateFlow<List<AllProductsItem>>(emptyList())
+    private val favoriteIds = MutableStateFlow<List<Int>>(emptyList())
 
     init {
         fetchAllProducts()
         fetchBrands()
+        getFavoriteProductsIds()
+        getAllProducts()
         viewModelScope.launch {
             combine(
                 getBrandsUseCase(),
-                getAllProductsUseCase(),
-                flowOf(getFavoriteProductsIdsUseCase()),
+                products,
+                favoriteIds,
                 navigationRoute
             ) { brandsItems, allProductsItems, favoriteIds, navigationRoute ->
                 GalleryUiState(
@@ -62,25 +67,25 @@ class GalleryScreenViewModel(
             if (this.isEmpty()) {
                 getAllProducts()
             } else {
-                _products.value = this
+                products.value = this
             }
         }
         getFavoriteProductsIds()
     }
 
-    fun getAllProducts() = viewModelScope.launch {
+    private fun getAllProducts() = viewModelScope.launch {
         getAllProductsUseCase().collect {
             if (it.isNotEmpty()) {
-                _products.value = it
+                products.value = it
             } else {
                 println("Products list is empty")
             }
         }
     }
 
-    fun getFavoriteProductsIds() {
+    private fun getFavoriteProductsIds() {
         viewModelScope.launch {
-            _favoriteIds.value = getFavoriteProductsIdsUseCase()
+            favoriteIds.value = getFavoriteProductsIdsUseCase()
         }
     }
 
