@@ -5,8 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
-import org.dtcm.work.common.data.data.ProductDetailsData
+import org.dtcm.work.common.data.data.ProductDetailsDataResponse
 import org.dtcm.work.common.data.data.TopProductItem
 import org.dtcm.work.domain.DeleteFromFavoriteProductsUseCase
 import org.dtcm.work.domain.GetProductDetailsUseCase
@@ -28,68 +29,114 @@ class ProductDetailsViewModel(
 ) : ViewModel() {
 
     private val productId by lazy { checkNotNull(savedStateHandle.get<String>(PRODUCT_ID)) }
-    private val _productDetail = MutableStateFlow(ProductDetailsData())
-    val productDetails = _productDetail.asStateFlow()
 
-    private val _topProductsList = MutableStateFlow(listOf<TopProductItem>())
-    val topProductsList = _topProductsList.asStateFlow()
+    private val _uiState = MutableStateFlow(ProductDetailsUiState())
+    val uiState = _uiState.asStateFlow()
 
-    private val _isProductInFavorites = MutableStateFlow<Boolean?>(null)
-    val isProductInFavorites = _isProductInFavorites.asStateFlow()
-
-    private val _startBookingLogic = MutableStateFlow(false)
-    val startBookingLogic = _startBookingLogic.asStateFlow()
-
-    private val _isProductBooked = MutableStateFlow(false)
-    val isProductBooked = _isProductBooked.asStateFlow()
+    private val productDetail = MutableStateFlow(ProductDetailsData())
+    private val startBookingLogic = MutableStateFlow(false)
+    private val isProductBooked = MutableStateFlow(false)
+    private val isProductFavorite = MutableStateFlow<Boolean?>(null)
 
     init {
         getProductDetail(productId)
-        checkProductIsFavorite(productId)
         isProductBooked(productId)
-    }
 
-    fun getTopProductsList() {
         viewModelScope.launch {
-            getTopProductsUseCase().collect { data ->
-                if (data.isNotEmpty()) {
-                    _topProductsList.value = data
-                } else {
-                    println("Top products is empty")
+            combine(
+                getTopProductsUseCase(),
+                getProductDetailsUseCase(productId),
+                isProductBooked,
+                startBookingLogic,
+                isProductFavorite
+            ) { topProductsList, productDetails, isProductBooked, startBookingLogic,
+                isProductFavorite ->
+                with(productDetails) {
+                    ProductDetailsUiState(
+                        productDetails = ProductDetailsData(
+                            id = id,
+                            images = images,
+                            title = title,
+                            salePercentage = salePercentage,
+                            saleStartsDate = saleStartsDate,
+                            saleEndsDate = saleEndsDate,
+                            address = address,
+                            originalPrice = originalPrice,
+                            priceOnSale = priceOnSale,
+                            sizes = sizes,
+                        ),
+                        topProducts = topProductsList,
+                        isProductInFavorites = isProductFavorite ?: isProductInFavoritesUseCase(
+                            productId.toInt()
+                        ),
+                        isProductBooked = isProductBooked,
+                        startBookingLogic = startBookingLogic
+                    )
                 }
+            }.collect { newState ->
+                _uiState.value = newState
             }
         }
     }
 
-    fun saveProductToFavorites(productItem: ProductDetailsData) = viewModelScope.launch {
-        saveToFavoriteProductUseCase(productItem.asFavoriteProduct())
-    }
-
-    fun deleteFromFavoriteProducts(productId: Int) = viewModelScope.launch {
-        deleteFromFavoriteProductsUseCase(productId)
-    }
-
-    fun startBookingLogic(shouldShowBookingLogic: Boolean) {
-        _startBookingLogic.value = shouldShowBookingLogic
-    }
-
-    fun checkIfProductBooked() {
-        _startBookingLogic.value = false
-        isProductBooked(productId)
-    }
-
     private fun getProductDetail(productId: String) = viewModelScope.launch {
         getProductDetailsUseCase(productId).collect {
-            _productDetail.value = it
+            with(it) {
+                productDetail.value = ProductDetailsData(
+                    id = id,
+                    images = images,
+                    title = title,
+                    salePercentage = salePercentage,
+                    saleStartsDate = saleStartsDate,
+                )
+            }
         }
     }
 
     private fun isProductBooked(productId: String) = viewModelScope.launch {
-        _isProductBooked.value = isProductBookedUseCase(productId.toInt()) == true
+        isProductBooked.value = isProductBookedUseCase(productId.toInt()) == true
     }
 
-    private fun checkProductIsFavorite(productId: String) = viewModelScope.launch {
-        _isProductInFavorites.value = isProductInFavoritesUseCase(productId.toInt())
+
+    fun handleSaveProductToFavorites() = viewModelScope.launch {
+        if (isProductFavorite.value == true) {
+            isProductFavorite.value = false
+            deleteFromFavoriteProducts(uiState.value.productDetails.id)
+        } else {
+            isProductFavorite.value = true
+            saveProductToFavorites(uiState.value.productDetails)
+        }
     }
 
+    private fun saveProductToFavorites(productItem: ProductDetailsData) = viewModelScope.launch {
+        with(productItem) {
+            saveToFavoriteProductUseCase(
+                ProductDetailsDataResponse(
+                    id = id,
+                    images = images,
+                    title = title,
+                    salePercentage = salePercentage,
+                    saleStartsDate = saleStartsDate,
+                    saleEndsDate = saleEndsDate,
+                    address = address,
+                    originalPrice = originalPrice,
+                    priceOnSale = priceOnSale,
+                    sizes = sizes
+                ).asFavoriteProduct()
+            )
+        }
+    }
+
+    private fun deleteFromFavoriteProducts(productId: Int) = viewModelScope.launch {
+        deleteFromFavoriteProductsUseCase(productId)
+    }
+
+    fun startBookingLogic() {
+        startBookingLogic.value = true
+    }
+
+    fun checkIfProductBooked() {
+        startBookingLogic.value = false
+        isProductBooked(productId)
+    }
 }
