@@ -1,9 +1,10 @@
 package org.dtcm.work.common.data.data
 
 import kotlinx.serialization.Serializable
-import org.dtcm.work.common.data.data.FavoriteProduct
 import org.dtcm.work.database.data.ProductImages
 import org.dtcm.work.database.data.ProductSizes
+
+// FIXME: Separate data class for local and firebase response usage
 @Serializable
 data class ProductDetailsData(
     val id: Int? = null,
