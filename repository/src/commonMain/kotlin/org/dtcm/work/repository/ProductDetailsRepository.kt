@@ -3,15 +3,13 @@ package org.dtcm.work.repository
 import Converters
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
-import org.dtcm.work.common.data.data.ProductDetailsData
+import org.dtcm.work.common.data.data.ProductDetailsDataResponse
 import org.dtcm.work.database.AppDatabase
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 
 class ProductDetailsRepository(private val roomDb: AppDatabase) {
     fun getTopProductDetails(productId: String) =
         roomDb.productDao().getTopProductDetail(productId).map {
-            ProductDetailsData(
+            ProductDetailsDataResponse(
                 id = it.id,
                 address = it.address,
                 images = Converters().toImagesList(it.imageUrl),
@@ -26,7 +24,7 @@ class ProductDetailsRepository(private val roomDb: AppDatabase) {
         }
 
     fun getProductDetails(productId: String) = roomDb.productDao().getProductDetail(productId).map {
-        ProductDetailsData(
+        ProductDetailsDataResponse(
             id = it.id,
             address = it.address,
             images = Converters().toImagesList(it.imageUrl),
