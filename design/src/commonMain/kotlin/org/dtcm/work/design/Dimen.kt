@@ -2,7 +2,6 @@ package org.dtcm.work.design
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-const val GRID_CELLS = 2
 
 val small50 = 4.dp
 val small100 = 8.dp
