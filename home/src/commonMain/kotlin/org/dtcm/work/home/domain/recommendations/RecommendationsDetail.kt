@@ -1,8 +1,6 @@
 package org.dtcm.work.home.domain.recommendations
 
 import GenericProductItem
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -11,8 +9,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import org.dtcm.work.common.data.createSavedStateHandle
-import org.dtcm.work.common.data.navigation.ScreenRoute
-import org.dtcm.work.design.GRID_CELLS
+import org.dtcm.work.common.data.ui.MainLazyVerticalGrid
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 
@@ -31,9 +28,8 @@ fun RecommendationsDetail(
         viewModel.resetNavigation()
     }
 
-    LazyVerticalGrid(
+    MainLazyVerticalGrid(
         modifier = modifier,
-        columns = GridCells.Fixed(GRID_CELLS),
         content = {
             items(uiState.products) { product ->
                 GenericProductItem(
