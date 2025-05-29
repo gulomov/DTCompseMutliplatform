@@ -38,7 +38,7 @@ fun FavoritesScreen(
             )
         }
         MainLazyVerticalGrid {
-            items(uiState.favoriteProducts) { favoriteProduct ->
+            items(uiState.favoriteProducts, key = { "${it.id}+${it.title}" }) { favoriteProduct ->
                 GenericProductItem(
                     item = favoriteProduct,
                     onClick = {
