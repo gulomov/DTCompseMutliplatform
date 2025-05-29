@@ -58,26 +58,25 @@ fun BottomSheetConfirmation(
                     .padding(normal100)
             )
             Row {
-                MainButton(
-                    onClick = { onRebookClicked() },
-                    content = { Text(text = stringResource(Res.string.button_book_text)) },
-                    modifier = modifier
-                        .weight(1f)
-                        .align(Alignment.CenterVertically)
-                        .padding(normal100),
-                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.onPrimaryContainer)
-                )
-                MainButton(
-                    onClick = { onDismissBottomSheet() },
-                    content = { Text(text = stringResource(Res.string.button_nope_text)) },
-                    modifier = modifier
-                        .weight(1f)
-                        .align(Alignment.CenterVertically)
-                        .padding(normal100),
-                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error)
-                )
+                listOfButtons().forEach {
+                    MainButton(
+                        onClick = { onRebookClicked() },
+                        content = { Text(text = stringResource(it.first)) },
+                        modifier = modifier
+                            .weight(1f)
+                            .align(Alignment.CenterVertically)
+                            .padding(normal100),
+                        colors = ButtonDefaults.buttonColors(containerColor = it.second)
+                    )
+                }
             }
             Spacer(modifier = Modifier.height(normal100))
         }
     }
 }
+
+@Composable
+private fun listOfButtons() = listOf(
+    Res.string.button_book_text to MaterialTheme.colorScheme.onPrimaryContainer,
+    Res.string.button_nope_text to MaterialTheme.colorScheme.error
+)
