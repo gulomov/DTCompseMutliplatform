@@ -20,6 +20,7 @@ fun BookingScreen(
     viewModel: BookingScreenViewModel = koinInject()
 ) {
     viewModel.getBookedProductDetail(productId)
+    // FIXME:  Remove this redundant remember and collect as state and pass lambda into onRebookClicked
 
     val showDatePickerStateFlow = remember { MutableStateFlow(showDatePicker) }
     val showBottomSheetStateFlow = remember { MutableStateFlow(showBottomSheet) }
